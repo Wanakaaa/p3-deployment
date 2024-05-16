@@ -17,14 +17,18 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         if (response.ok) {
             return response.json();
         } else {
-            afficherErreurConnexion()
+            throw new Error('Identifiants incorrects');
         }
     })
-    .then( response => {
+    .then(response => {
+        // Si succès de la requête :
         let user = response;
         sessionStorage.setItem("user", JSON.stringify(user));
-        let data = JSON.parse(sessionStorage.getItem("user"));
         window.location.href = "index.html";
+    })
+    .catch(error => {
+        afficherErreurConnexion();
+        console.error("Erreur de connexion :", error.message);
     })
 });
 
