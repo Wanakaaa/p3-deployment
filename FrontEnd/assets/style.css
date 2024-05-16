@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -188,6 +189,16 @@ footer nav ul {
 
 /* Mes Ajouts */
 
+/* Fond */
+
+footer {
+	position: relative;
+	bottom: 0;
+	height: 60px;
+	background-color: blue;
+}
+
+/* Boutons  */
 .btns-portfolio {
 	display: flex;
 	justify-content: center;
@@ -211,4 +222,28 @@ footer nav ul {
 	border: 2px solid #ffff;
 	color: #ffff;
 	background-color: #1D6154;
+}
+
+/* Login */
+
+.form-login {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+}
+
+#loginForm {
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	max-width: 450px;
+	border: 2px solid blue;
+}
+
+.mdp-oublie {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

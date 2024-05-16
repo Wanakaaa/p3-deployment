@@ -1,108 +1,78 @@
-fetch ("http://localhost:5678/api/works")
-    .then(response => response.json())
-    .then(data => console.log(data));
+// Ajouter les boutons dans la partie portfolio, sous le h2 ?
+// Ajouter 4 boutons : Tous / Objets / Appartements / Hotels & Restaurants
 
-let gallery = document.querySelector(".gallery");
+const portfolio = document.getElementById("portfolio");
+const gallery = document.querySelector(".gallery");
+// je crée la div pour les boutons
+const divBtn = document.createElement("div");
+portfolio.appendChild(divBtn);
+portfolio.insertBefore(divBtn, gallery);
 
-// fetch("http://localhost:5678/api/works")
-//     .then((response) => response.json())
-//     .then((works) => {
-//     console.log(works);
-//     console.log(gallery);
-
-//     works.map(work => gallery.innerHTML += `<figure>
-//     <img src="${work.imageUrl}" alt="${work.title}"> <figcaption> ${work.title}</figcaption> </figure>`)
-//     });
-
-// Bouton à ajouter Tous / Objets (categoryId 1) / Appartements (catId 2) / Hotels & restaurants (cat3)
+// Add class btns-portfolio 
+divBtn.classList.add('btns-portfolio');
 
 
-// Je crée la div btn
-const portofolioSection = document.getElementById('portfolio');
-const newDivBtn = document.createElement('div');
-const titrePortfolio = portofolioSection.querySelector('h2');
-portofolioSection.insertBefore(newDivBtn, titrePortfolio.nextSibling)
+let categoriesGlobal = [];
+fetch("http://localhost:5678/api/categories")
+    .then((response) => response.json())
+    .then((categories) => {
+        updateBtn(categories);
 
-newDivBtn.classList.add('borderBtn');
-newDivBtn.style.background = "green";
+        categoriesGlobal = categories;
+        console.log(categoriesGlobal);
+    });
 
-const btnTous = document.createElement('button');
-const btnObjet = document.createElement('button');
-const btnAppart = document.createElement('button');
-const btnHotel = document.createElement('button');
-newDivBtn.append(btnTous);
-btnTous.innerText = 'Tous';
-btnObjet.innerText = 'Objets';
-btnAppart.innerText = 'Appartements';
-btnHotel.innerText = 'Hotels & restaurants';
-
-btnTous.addEventListener('click', function(){
-    fetch("http://localhost:5678/api/works")
+let worksGlobal = [];
+fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then((works) => {
-    console.log(works);
-
-    
-    console.log(gallery);
-
-    works.map(work => gallery.innerHTML += `<figure>
-    <img src="${work.imageUrl}" alt="${work.title}"> <figcaption> ${work.title}</figcaption> </figure>`)
+        updateGallery(works);
+        worksGlobal = works;
     });
-})
 
-btnObjet.addEventListener('click', function(){
-    fetch("http://localhost:5678/api/works")
-    .then((response) => response.json())
-    .then((works) => {
-    console.log(works);
-    console.log(gallery);
 
-    works.filter(work => work.categoryId === 1).map(work => gallery.innerHTML += `<figure>
-    <img src="${work.imageUrl}" alt="${work.title}"> <figcaption> ${work.title}</figcaption> </figure>`)
+function updateBtn(categories) {
+    const btnTous = document.createElement("button");
+    btnTous.innerText = "Tous";
+    btnTous.id = `btnTous`;
+    divBtn.appendChild(btnTous);
+    btnTous.addEventListener('click', () => {
+        updateGallery(worksGlobal)
+    })
+
+    categories.forEach((categorie) => {
+        const btn = document.createElement("button");
+        btn.innerText = categorie.name;
+        btn.id = `btn${categorie.name}`;
+        divBtn.appendChild(btn);
+        btn.addEventListener('click', () => {
+            let filteredWorks = filterCategory(worksGlobal, categorie.id);
+            updateGallery(filteredWorks)
+        })
     });
-})
+}
+
+
+// Afficher les données récupérée via l'API
+
+// 1. Définir gallery (en haut)
+// afficher tous les éléments au chargement de la page
+
+function updateGallery(works) {
+    gallery.innerHTML = "";
+    works.forEach((work) => {
+        const workFigure = document.createElement("figure");
+        workFigure.innerHTML = `
+        <img src = "${work.imageUrl}" alt="${work.title}">
+        <figcaption>${work.title} </figcaption>
+        `;
+        gallery.appendChild(workFigure);
+    });
+}
 
 
 
-
-// let btn = document.getElementById("btn1");
-// // console.log(btn);
-
-// btn.addEventListener("click", filterAppartment);
-
-// function filterAppartment() {
-//   updateWorks(2);
-// }
-
-// function updateWorks(categoryId = false) {
-//   fetch("http://localhost:5678/api/works")
-//     .then((response) => response.json())
-//     .then((works) => {
-//       console.log(works);
-//       // categoryId == 2
-//       // works == (11) [{...}, {...}, ...]
-
-//       // supprimer le contenu de gallery
-//       gallery.innerHTML = "";
-//       // filter les elements de works en fonction de l'argument category
-//       let filtered_works = [];
-//       if (categoryId === false) {
-//         filtered_works = works;
-//       } else {
-//         filtered_works = works.filter((work) => work.categoryId === categoryId);
-//       }
-//       // filtered_works == (6) [{...}, {...}, ...]
-
-//       // pour chacun des works filtrer, ajouter le code html representant ce works dans la div gallery
-//       // pour chacun des filtered_works, logguer la categoryId du work
-//       for (let i = 0; i < filtered_works.length; i++) {
-//         let work = filtered_works[i];
-
-//         gallery.innerHTML += `<figure><img src="${work.imageUrl}" alt="${work.title}"> <figcaption> ${work.title}</figcaption> </figure>`;
-//       }
-//     });
-// }
-
-// updateWorks();
-
-// `<figure><img src="${work.imageUrl}" alt="${work.title}"> <figcaption> ${work.title}</figcaption> </figure>`
+function filterCategory(array, categorieId) {
+    const categoryList = array.filter((work) => work.categoryId == categorieId);
+    return categoryList;
+}

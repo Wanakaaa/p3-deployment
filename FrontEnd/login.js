@@ -1,27 +1,44 @@
-let formLogin = document.getElementById('formLogin');
-console.log(formLogin);
 
-formLogin.addEventListener("submit", (event) => {
-    // On empêche le comportement par défaut
+document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
-    console.log("Il n’y a pas eu de rechargement de page");
 
-    // On récupère les deux champs et on affiche leur valeur
-    const password = document.getElementById("password").value;
+    // Récupère les valeurs des champs email et mot de passe
     const email = document.getElementById("email").value;
-    console.log(password);
-    console.log(email);
-});
+    const password = document.getElementById("password").value;
 
-fetch("http://localhost:5678/users/login",  {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: '{"email": "sophie.bluel@test.tld", "password": "S0phie"}'
-}) 
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
+    fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email, password: password})
     })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            afficherErreurConnexion()
+        }
+    })
+    .then( response => {
+        let user = response;
+        sessionStorage.setItem("user", JSON.stringify(user));
+        let data = JSON.parse(sessionStorage.getItem("user"));
+        window.location.href = "index.html";
+    })
+});
 
 // sophie.bluel@test.tld
 // S0phie
+
+//Créer fonction qui affiche identifiant incorrect 
+
+
+function afficherErreurConnexion () {
+    const divForm = document.getElementById('loginForm');
+    const messageErreur = document.createElement('p');
+    messageErreur.innerText = "Identifiants incorrects. Veuillez réessayer";
+    divForm.appendChild(messageErreur)
+}
+
+
