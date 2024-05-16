@@ -31,14 +31,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 // sophie.bluel@test.tld
 // S0phie
 
-//Créer fonction qui affiche identifiant incorrect 
-
 
 function afficherErreurConnexion () {
-    const divForm = document.getElementById('loginForm');
-    const messageErreur = document.createElement('p');
-    messageErreur.innerText = "Identifiants incorrects. Veuillez réessayer";
-    divForm.appendChild(messageErreur)
+    const loginForm = document.getElementById('loginForm');
+    const messageErreur = document.createElement('div');
+    messageErreur.innerHTML = `
+        <p class= "erreurLogin">Identifiants incorrects. Veuillez réessayer </p>
+    `;
+    loginForm.appendChild(messageErreur)
 }
-
 
