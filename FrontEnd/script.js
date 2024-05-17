@@ -27,9 +27,8 @@ if (userData) {
     portfolioH2.innerHTML += lienModifierWorksHTML;
 
     const lienModifierWorks = document.querySelector('#portfolio h2 a');
-    lienModifierWorks.addEventListener('click', () => {
-        console.log('cliqué ! ');
-    })
+    lienModifierWorks.addEventListener('click', createModal);
+
 
 
 } else {
@@ -40,7 +39,24 @@ if (userData) {
 }
 
 function createModal() {
-    
+    //Créer div.modal + div.modal-content + span.closebtn + p
+    const container = document.createElement('div');
+    const modal = 
+    `
+        <div id="simpleModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <p>Hello, I'm a modal</p>
+        </div>
+    </div>
+    `;
+
+    container.innerHTML = modal;
+    portfolio.appendChild(container)
+
+
+    return container;
+
 }
 
 
