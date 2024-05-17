@@ -1,15 +1,47 @@
-// Ajouter les boutons dans la partie portfolio, sous le h2 ?
-// Ajouter 4 boutons : Tous / Objets / Appartements / Hotels & Restaurants
+const userData = JSON.parse(sessionStorage.getItem("user"));
 
 const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
-// je crée la div pour les boutons
 const divBtn = document.createElement("div");
-portfolio.appendChild(divBtn);
-portfolio.insertBefore(divBtn, gallery);
 
-// Add class btns-portfolio 
-divBtn.classList.add('btns-portfolio');
+if (userData) {
+    //Ajout bandeau noir
+
+    const body = document.querySelector('body');
+    const header = document.querySelector('header');
+    const banner = document.createElement('div');
+    banner.classList.add('banner');
+    banner.innerHTML =
+    `
+    <i class="fa-regular fa-pen-to-square"></i> Mode édition
+    `;
+    body.insertBefore(banner, header)
+
+    //Remplacement login par logout
+    const liLogin = document.querySelector('nav ul li > a[href="./login.html"]');
+    liLogin.innerText = 'Logout';
+
+    //Ajout du "modifier" à côté de "Mes projets"
+    const portfolioH2 = document.querySelector('#portfolio h2');
+    const lienModifierWorksHTML = `<a class="differente" href="#"><i class="fa-regular fa-pen-to-square"></i> Modifier</a>`;
+    portfolioH2.innerHTML += lienModifierWorksHTML;
+
+    const lienModifierWorks = document.querySelector('#portfolio h2 a');
+    lienModifierWorks.addEventListener('click', () => {
+        console.log('cliqué ! ');
+    })
+
+
+} else {
+    portfolio.appendChild(divBtn);
+    portfolio.insertBefore(divBtn, gallery);
+    // Add class btns-portfolio 
+    divBtn.classList.add('btns-portfolio');
+}
+
+function createModal() {
+    
+}
 
 
 let categoriesGlobal = [];
@@ -76,3 +108,5 @@ function filterCategory(array, categorieId) {
     const categoryList = array.filter((work) => work.categoryId == categorieId);
     return categoryList;
 }
+
+// Modale ? 
