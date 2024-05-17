@@ -276,6 +276,8 @@ footer nav ul {
 	align-items: center;
 }
 
+/* Modal */
+
 .modal{
     /* display: none; */
     position: fixed;
@@ -294,4 +296,15 @@ footer nav ul {
     padding: 20px;
     width: 70%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.closeBtn {
+    color: #000000;
+    float: right;
+    font-size: 30px;
+}
+
+.titreGallery {
+	font-size: 26px;
+	text-align: center;
 }
