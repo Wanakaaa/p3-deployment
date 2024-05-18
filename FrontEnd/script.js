@@ -5,8 +5,21 @@ const gallery = document.querySelector(".gallery");
 const divBtn = document.createElement("div");
 
 if (userData) {
-    //Ajout bandeau noir
+    createEditionBanner()
+    replaceLoginByLogOut()
+    addModifierEdition()
 
+    const lienModifierWorks = document.querySelector('#portfolio h2 a');
+    lienModifierWorks.addEventListener('click', createModal);
+
+} else {
+    portfolio.appendChild(divBtn);
+    portfolio.insertBefore(divBtn, gallery);
+    // Add class btns-portfolio 
+    divBtn.classList.add('btns-portfolio');
+}
+
+function createEditionBanner () {
     const body = document.querySelector('body');
     const header = document.querySelector('header');
     const banner = document.createElement('div');
@@ -16,23 +29,17 @@ if (userData) {
     <i class="fa-regular fa-pen-to-square"></i> Mode édition
     `;
     body.insertBefore(banner, header)
+}
 
-    //Remplacement login par logout
+function replaceLoginByLogOut(){
     const liLogin = document.querySelector('nav ul li > a[href="./login.html"]');
     liLogin.innerText = 'Logout';
+}
 
-    //Ajout du "modifier" à côté de "Mes projets"
+function addModifierEdition() {
     const portfolioH2 = document.querySelector('#portfolio h2');
     const lienModifierWorksHTML = `<a class="differente" href="#"><i class="fa-regular fa-pen-to-square"></i> Modifier</a>`;
     portfolioH2.innerHTML += lienModifierWorksHTML;
-
-    const lienModifierWorks = document.querySelector('#portfolio h2 a');
-    lienModifierWorks.addEventListener('click', createModal);
-} else {
-    portfolio.appendChild(divBtn);
-    portfolio.insertBefore(divBtn, gallery);
-    // Add class btns-portfolio 
-    divBtn.classList.add('btns-portfolio');
 }
 
 function createModal() {
@@ -52,26 +59,26 @@ function createModal() {
     container.innerHTML = modal;
     portfolio.appendChild(container)
 
-    // getWorksModal()
+    getWorksModal()
 }
 
 
 // Récupérer toutes les travaux de l'API
 
-// function getWorksModal(){
-// fetch("http://localhost:5678/api/works")
-//     .then((response) => response.json())
-//     .then ((works) => {
-//         console.log(works)
-//         updateGalleryModal(works)
-//     })
-// }
+function getWorksModal(){
+fetch("http://localhost:5678/api/works")
+    .then((response) => response.json())
+    .then ((works) => {
+        console.log(works)
+        updateGalleryModal(works)
+    })
+}
 
 function updateGalleryModal(works) {
     const galleryModal = document.querySelector('.galleryModal');
+    console.log(works);
     if (galleryModal) {
         galleryModal.innerHTML = "";
-        console.log(works);
         works.forEach((work) => {
         const workFigure = document.createElement("figure");
         workFigure.innerHTML = `
@@ -101,7 +108,6 @@ fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then((works) => {
         updateGallery(works);
-        updateGalleryModal(works)
         worksGlobal = works;
     });
 
