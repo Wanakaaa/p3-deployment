@@ -279,7 +279,7 @@ footer nav ul {
 /* Modal */
 
 .modal{
-    /* display: none; */
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -302,6 +302,11 @@ footer nav ul {
     color: #000000;
     float: right;
     font-size: 30px;
+}
+
+.closeBtn:hover, .closeBtn:focus {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .titreGallery {

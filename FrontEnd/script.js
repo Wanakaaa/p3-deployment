@@ -4,13 +4,20 @@ const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
 const divBtn = document.createElement("div");
 
+
+
 if (userData) {
     createEditionBanner()
     replaceLoginByLogOut()
     addModifierEdition()
 
     const lienModifierWorks = document.querySelector('#portfolio h2 a');
-    lienModifierWorks.addEventListener('click', createModal);
+    
+
+    lienModifierWorks.addEventListener('click', openModal);
+    // Remplacer createModal par openModal ? 
+    // Juste appeler create modal quand openModal est appelée
+
 
 } else {
     portfolio.appendChild(divBtn);
@@ -19,6 +26,8 @@ if (userData) {
     divBtn.classList.add('btns-portfolio');
 }
 
+
+// Modification pour mode édition
 function createEditionBanner () {
     const body = document.querySelector('body');
     const header = document.querySelector('header');
@@ -42,10 +51,11 @@ function addModifierEdition() {
     portfolioH2.innerHTML += lienModifierWorksHTML;
 }
 
-function createModal() {
-    //Créer div.modal + div.modal-content + span.closebtn + p
+
+// Création modal
+function openModal() {
     const container = document.createElement('div');
-    const modal = 
+    const modalHTML = 
     `
         <div id="simpleModal" class="modal">
         <div class="modal-content">
@@ -56,15 +66,26 @@ function createModal() {
         </div>
     </div>
     `;
-    container.innerHTML = modal;
+
+    container.innerHTML = modalHTML;
     portfolio.appendChild(container)
 
-    getWorksModal()
+    const modal = document.querySelector('.modal');
+    modal.style.display = 'block'
+
+    getWorksModal();
+
+    const closeBtn = document.querySelector('.closeBtn');
+    closeBtn.addEventListener('click', closeBtnModal);
+
 }
 
+function closeBtnModal() {
+    const modal = document.querySelector('.modal')
+    modal.style.display = "none";
+}
 
-// Récupérer toutes les travaux de l'API
-
+// Récupérer toutes les travaux de l'API pour la modal
 function getWorksModal(){
 fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -91,18 +112,17 @@ function updateGalleryModal(works) {
     }
 }
 
-
-
+// Récupération des catégories
 let categoriesGlobal = [];
 fetch("http://localhost:5678/api/categories")
     .then((response) => response.json())
     .then((categories) => {
         updateBtn(categories);
-
         categoriesGlobal = categories;
         // console.log(categoriesGlobal);
     });
 
+// Récupération de l'ensemble des travaux, ajout à la gallery
 let worksGlobal = [];
 fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -111,8 +131,9 @@ fetch("http://localhost:5678/api/works")
         worksGlobal = works;
     });
 
-
+// Création des boutons de catégories
 function updateBtn(categories) {
+    // Pour le bouton Tous
     const btnTous = document.createElement("button");
     btnTous.innerText = "Tous";
     btnTous.id = `btnTous`;
@@ -121,6 +142,7 @@ function updateBtn(categories) {
         updateGallery(worksGlobal)
     })
 
+    // Pour les autres boutons
     categories.forEach((categorie) => {
         const btn = document.createElement("button");
         btn.innerText = categorie.name;
