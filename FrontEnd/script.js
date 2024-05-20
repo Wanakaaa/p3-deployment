@@ -55,14 +55,17 @@ function addModifierEdition() {
 // Création modal
 function openModal() {
     const container = document.createElement('div');
+    console.log(container);
     const modalHTML = 
     `
         <div id="simpleModal" class="modal">
         <div class="modal-content">
             <span class="closeBtn">&times;</span> <br>
             <h3 class="titreGallery">Galerie photo</h3>
-            <div class= "galleryModal"> 
+            <div class= "galleryModal">
             </div>
+            <hr>
+            <button class="btnAddImg" type="submit">Ajouter une photo</button>
         </div>
     </div>
     `;
@@ -77,6 +80,8 @@ function openModal() {
 
     const closeBtn = document.querySelector('.closeBtn');
     closeBtn.addEventListener('click', closeBtnModal);
+    window.addEventListener('click', outsideClick);
+
 
 }
 
@@ -85,31 +90,73 @@ function closeBtnModal() {
     modal.style.display = "none";
 }
 
+function outsideClick(event){
+    const modal = document.querySelector('.modal')
+    if(event.target == modal){
+        modal.style.display = "none";
+    }
+}
+
 // Récupérer toutes les travaux de l'API pour la modal
 function getWorksModal(){
 fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then ((works) => {
-        console.log(works)
         updateGalleryModal(works)
     })
 }
 
 function updateGalleryModal(works) {
     const galleryModal = document.querySelector('.galleryModal');
-    console.log(works);
     if (galleryModal) {
         galleryModal.innerHTML = "";
         works.forEach((work) => {
-        const workFigure = document.createElement("figure");
+        const workFigure = document.createElement("div");
+        workFigure.classList.add('containerBin')
         workFigure.innerHTML = `
             <img src = "${work.imageUrl}" alt="${work.title}">
+            <div id='deleteBtn${work.id}' class="iconBin"><i class="fa-solid fa-trash-can fa-xs"></i>
+            </div>
             `;
             galleryModal.appendChild(workFigure);
+            
+            // créer un id iconBin qui s'ajoute à la création for each
+
+            const bin = document.querySelector(`#deleteBtn${work.id}`);
+            bin.addEventListener('click', () => deleteWork(`${work.id}`));
         });
+        
     } else {
         console.log('erreur')
     }
+}
+
+
+function deleteWork(id) {
+    fetch(`http://localhost:5678/api/works/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userData.token}`
+        }
+})
+    .then((works) => {
+        console.log(`Work ${id} deleted`)
+        getWorksModal()
+    })
+    
+    // Vider la galleryModal
+    const galleryModal = document.querySelector('.galleryModal');
+
+    // Récupérer la liste des Works 
+
+    //faire un appel à l'API pour récupérer les works
+    // Enlever le work à l'index id (peut être id - 1) de la suite des works à afficher
+    // Afficher la galleryModal avec cette nouvelle liste de works
+    // Utiliser à présent cette liste de works
+
+    // Quand on clique sur une poubelle, il faut récupérer l'index ? numéro de lélément
+    // selectionné, et le supprimer pour qu'il n'apparaisse plus
 }
 
 // Récupération des catégories
@@ -123,14 +170,15 @@ fetch("http://localhost:5678/api/categories")
     });
 
 // Récupération de l'ensemble des travaux, ajout à la gallery
-let worksGlobal = [];
-fetch("http://localhost:5678/api/works")
-    .then((response) => response.json())
-    .then((works) => {
-        updateGallery(works);
-        worksGlobal = works;
-    });
+displayWorks()
 
+function displayWorks(){
+    fetch("http://localhost:5678/api/works")
+        .then((response) => response.json())
+        .then((works) => {
+            updateGallery(works);
+        });
+}
 // Création des boutons de catégories
 function updateBtn(categories) {
     // Pour le bouton Tous
@@ -180,4 +228,3 @@ function filterCategory(array, categorieId) {
     return categoryList;
 }
 
-// Modale ? 

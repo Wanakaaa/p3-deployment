@@ -140,7 +140,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -279,6 +279,7 @@ footer nav ul {
 /* Modal */
 
 .modal{
+	border: 5px solid blue;
     display: none;
     position: fixed;
     z-index: 1;
@@ -291,17 +292,45 @@ footer nav ul {
 }
 
 .modal-content{
+	border: 3px solid red;
     background-color: #f4f4f4;
     margin: 20% auto;
-    padding: 20px;
     width: 70%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px 0 45px 0;
+	border-radius: 10px;
+
+}
+
+.galleryModal {
+    border: 2px solid purple;
+    display: flex;
+    flex-wrap: wrap;
+	padding: 0px 105px;
+}
+
+.galleryModal div {
+    flex: 0 1 20%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.galleryModal img {
+    width: 100%;
+    height: auto;
 }
 
 .closeBtn {
+	/* border: 2px solid green; */
     color: #000000;
-    float: right;
     font-size: 30px;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: end;
+	padding: 0 30px;
 }
 
 .closeBtn:hover, .closeBtn:focus {
@@ -312,4 +341,44 @@ footer nav ul {
 .titreGallery {
 	font-size: 26px;
 	text-align: center;
+	padding: 10px 0 46px 0;
+}
+
+.btnAddImg {
+	width: 25%;
+	text-align: center;
+	border: 1px solid #1D6154;
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700;
+	color: #f4f4f4; 
+	background-color: #1D6154;
+	border-radius: 20px;
+	padding: 6px 20px;
+}
+
+.btnAddImg:hover {
+	cursor: pointer;
+}
+
+hr {
+	border-top: 1px solid #B3B3B3;
+	width: 70%;
+}
+
+/* Ajout poubelle sur image */
+.containerBin {
+    position: relative;
+    display: inline-block;
+}
+
+.iconBin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    text-align: center;
+	cursor: pointer;
 }
