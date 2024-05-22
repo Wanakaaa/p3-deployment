@@ -45,6 +45,8 @@ function replaceLoginByLogOut(){
     liLogin.innerText = 'Logout';
 }
 
+// function logOut()
+
 function addModifierEdition() {
     const portfolioH2 = document.querySelector('#portfolio h2');
     const lienModifierWorksHTML = `<a class="differente" href="#"><i class="fa-regular fa-pen-to-square"></i> Modifier</a>`;
@@ -55,44 +57,58 @@ function addModifierEdition() {
 // Création modal
 function openModal() {
     const container = document.createElement('div');
-    const modalHTML = 
+    container.classList.add('container');
+    const modalHTML =
     `
         <div id="simpleModal" class="modal">
         <div class="modal-content">
-            <span class="closeBtn">&times;</span> <br>
-            <h3 class="titreGallery">Galerie photo</h3>
-            <div class= "galleryModal">
-            </div>
-            <hr>
-            <button class="btnAddImg" type="submit">Ajouter une photo</button>
+        
         </div>
     </div>
     `;
 
     container.innerHTML = modalHTML;
+
+    
     portfolio.appendChild(container)
 
     const modal = document.querySelector('.modal');
     modal.style.display = 'block'
 
-    getWorksModal();
+    setGalleryModal()
 
-    const closeBtn = document.querySelector('.closeBtn');
+    const closeBtn = document.querySelector('.closeBtn i');
     closeBtn.addEventListener('click', closeBtnModal);
     window.addEventListener('click', outsideClick);
 
+}
+
+function setGalleryModal() {
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.innerHTML = `
+        <span  class="closeBtn"><i class="fa-solid fa-xmark fa-sm"></i></span> <br>
+        <h3 class="titreGallery">Galerie photo</h3>
+        <div class= "galleryModal">
+        </div>
+        <hr>
+        <button class="btnAddImg" type="submit">Ajouter une photo</button>
+    `;
+    getWorksModal();
+    
 
 }
 
 function closeBtnModal() {
     const modal = document.querySelector('.modal')
     modal.style.display = "none";
+
 }
 
 function outsideClick(event){
     const modal = document.querySelector('.modal')
     if(event.target == modal){
         modal.style.display = "none";
+        
     }
 }
 
@@ -136,11 +152,68 @@ function updateGalleryModal(works) {
 
 function addNewImg() {
     let modalContent = document.querySelector('.modal-content');
-    modalContent.innerHTML = '';
-    
+    modalContent.innerHTML = `
+    <div class="returnClose">
+                <span class="returnBtn"><i class="fa-solid fa-arrow-left fa-sm"></i></span>
+                <span class="closeBtn"><i class="fa-solid fa-xmark fa-sm"></i></span>
+            </div>
+            <br>
+            <h3 class="titreModal">Ajout photo</h3>
+            <div class="AddImgModal">
+                <div>
+                    <i class="fa-regular fa-image imgIcon"></i>
+                </div>
+                    <div><button class="addPhoto">+ Ajouter photo</button></div>
+                    <div class="infoPhoto">jpg, png : 4mo max</div>
+            </div>
+            <div class="formAjoutPhoto">
+                <form action="#" method="post">
+                    <label for="titre">Titre</label>
+                    <input type="text" name="titre" id="titre">
 
+                    <label for="category">Catégorie</label>
+                    <select type="category" name="category" id="category">
+                        <option value="" disabled selected hidden></option>
+                    </select>
+
+                    <hr class="hrAddPhoto">
+                    <input class="validerInput" type="submit" value="Valider">
+                </form>
+            </div>
+    `;
+
+    //Je dois récupérer mes catégories dynamiquement 
+    const selectCategory = document.getElementById('category');
+    for (let i= 0; i < categoriesGlobal.length; i++) {
+        let categoryChoice = document.createElement('option')
+        categoryChoice.classList.add('catChoice');
+        categoryChoice.dataset.value = `categorie${categoriesGlobal[i].id}`;
+        categoryChoice.innerText = `${categoriesGlobal[i].name}`
+        selectCategory.appendChild(categoryChoice)
+    }
+
+    const closeBtn = document.querySelector('.closeBtn i');
+    closeBtn.addEventListener('click', closeBtnModal);
+
+    const returnBtn = document.querySelector('.returnBtn i');
+    returnBtn.addEventListener('click', returnGalleryModal);
+
+    const addPhoto = document.querySelector('.addPhoto');
+    addPhoto.addEventListener('click', ()=> console.log('cliqué addPhoto'))
+
+    const validerInput = document.querySelector('.validerInput');
+    validerInput.addEventListener('click', (event)=> {
+        event.preventDefault()
+        console.log('cliqué validerInput')
+    })
 }
 
+
+function returnGalleryModal() {
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.innerHTML = "";
+    openModal()
+}
 
 function deleteWork(id) {
     fetch(`http://localhost:5678/api/works/${id}`, {
