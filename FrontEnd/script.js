@@ -29,15 +29,15 @@ if (userData) {
 
 // Modification pour mode édition
 function createEditionBanner () {
+    const html = document.querySelector('html');
     const body = document.querySelector('body');
-    const header = document.querySelector('header');
     const banner = document.createElement('div');
     banner.classList.add('banner');
     banner.innerHTML =
     `
     <i class="fa-regular fa-pen-to-square"></i> Mode édition
     `;
-    body.insertBefore(banner, header)
+    html.insertBefore(banner, body)
 }
 
 function replaceLoginByLogOut(){
@@ -55,7 +55,6 @@ function addModifierEdition() {
 // Création modal
 function openModal() {
     const container = document.createElement('div');
-    console.log(container);
     const modalHTML = 
     `
         <div id="simpleModal" class="modal">
@@ -124,11 +123,22 @@ function updateGalleryModal(works) {
 
             const bin = document.querySelector(`#deleteBtn${work.id}`);
             bin.addEventListener('click', () => deleteWork(`${work.id}`));
+
         });
+        //Add eventListener sur button btnAddImg
+        const btnAddImg = document.querySelector('.btnAddImg');
+        btnAddImg.addEventListener('click', addNewImg);
         
     } else {
         console.log('erreur')
     }
+}
+
+function addNewImg() {
+    let modalContent = document.querySelector('.modal-content');
+    modalContent.innerHTML = '';
+    
+
 }
 
 
@@ -141,23 +151,14 @@ function deleteWork(id) {
         }
 })
     .then((works) => {
+        if (works.ok) {
         console.log(`Work ${id} deleted`)
         getWorksModal()
+        displayWorks()
+        }
     })
-    
-    // Vider la galleryModal
-    const galleryModal = document.querySelector('.galleryModal');
-
-    // Récupérer la liste des Works 
-
-    //faire un appel à l'API pour récupérer les works
-    // Enlever le work à l'index id (peut être id - 1) de la suite des works à afficher
-    // Afficher la galleryModal avec cette nouvelle liste de works
-    // Utiliser à présent cette liste de works
-
-    // Quand on clique sur une poubelle, il faut récupérer l'index ? numéro de lélément
-    // selectionné, et le supprimer pour qu'il n'apparaisse plus
-}
+    .catch(error => console.error('Error', error));
+} 
 
 // Récupération des catégories
 let categoriesGlobal = [];
@@ -170,15 +171,19 @@ fetch("http://localhost:5678/api/categories")
     });
 
 // Récupération de l'ensemble des travaux, ajout à la gallery
-displayWorks()
-
+let worksGlobal = [];
 function displayWorks(){
     fetch("http://localhost:5678/api/works")
         .then((response) => response.json())
         .then((works) => {
             updateGallery(works);
+            // return works;
+            worksGlobal = works;
         });
 }
+
+displayWorks()
+
 // Création des boutons de catégories
 function updateBtn(categories) {
     // Pour le bouton Tous
