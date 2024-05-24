@@ -1,3 +1,7 @@
+* {
+    font-family: 'Work Sans', sans-serif;
+}
+
 .modal{
 	border: 5px solid blue;
     position: fixed;
@@ -19,18 +23,36 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 10px 0 0 0;
+	padding: 10px 0 55px 0;
 	border-radius: 10px;
-
 }
 
-.closeBtn {
-    color: #000000;
-    font-size: 30px;
-	/* width: 100%; */
-	box-sizing: border-box;
-	text-align: end;
+.modalHeader {
+    border: 2px solid blue;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px 0 30px;
+    box-sizing: border-box;
+}
 
+.returnBtn i {
+    border: 2px solid pink;
+    width: 21px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeBtn i {
+    border: 2px solid pink;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .closeBtn:hover, .closeBtn:focus {
@@ -42,6 +64,79 @@
     cursor: pointer;
 }
 
+.modalTitle {
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30.5px;
+}
+
+.imgUploadForm form {
+    border: 2px solid grey;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+.uploadPhotoForm {
+    border: 2px solid purple;
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E8F1F6;
+    border-radius: 3px;
+    padding: 13px 0 19px 0;
+}
+
+.fileUploadLabel {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadImgIcon {
+    color: #CBD6DC;
+}
+
+.fileUploadBtn {
+    margin: 6px 0 7px 0;
+    height: 36px;
+    text-decoration: none;
+    background-color: #CBD6DC;
+    color: #306685;
+    border: none;
+    text-align: center;
+    border-radius: 50px;
+    padding: 0px 30px 0px 30px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.42px;
+    cursor: pointer;
+}
+
+
+#fileUpload {
+    display: none;
+}
+
+.previewDisplay {
+    display: none;
+}
+
+.infoPhoto {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 11.73px;
+    color: #444444;
+}
+
+
+
+ /* ------ */
+/*
 .titreModal {
     font-family: "Work Sans", sans-serif;
 	font-size: 26px;
@@ -165,4 +260,8 @@
 	border-radius: 60px ;
     cursor: pointer;
 }
+
+.previewDisplay {
+    display: none;
+} */
 

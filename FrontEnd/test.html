@@ -9,40 +9,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./test.css">
     <script src="https://kit.fontawesome.com/cca2fd5ffb.js" crossorigin="anonymous"></script>
+    <script src="test.js" defer></script>
 </head>
 <body>
 
-    <div id="simpleModal" class="modal">
+    <!-- OG  
+        <div id="modal" class="modal">
         <div class="modal-content">
+
             <div class="returnClose">
                 <span class="returnBtn"><i class="fa-solid fa-arrow-left fa-sm"></i></span>
                 <span class="closeBtn"><i class="fa-solid fa-xmark fa-sm"></i></span>
             </div>
-            <br>
-            <h3 class="titreModal">Ajout photo</h3>
-            <div class="AddImgModal">
-                <div>
-                    <i class="fa-regular fa-image imgIcon"></i>
-                </div>
-                    <div><button class="addPhoto">+ Ajouter photo</button></div>
-                    <div class="infoPhoto">jpg, png : 4mo max</div>
-            </div>
-            <div class="formAjoutPhoto">
-                <form action="#" method="post">
-                    <label for="titre">Titre</label>
-                    <input type="text" name="titre" id="titre">
 
+            <h3 class="titreModal">Ajout photo</h3>
+
+            <div class="AddImgModal">
+                <form method="post">
+
+                    <label for="uploadPhoto"><i class="fa-regular fa-image imgIcon"></i></label>
+                    <input type="file" accept=".jpg, .jpeg, .png" id="fileUpload" name="image">
+                    <img class="previewDisplay" src="#" alt="preview Uploaded Image" id="filePreview">
+                    <div class="infoPhoto">jpg, png : 4mo max</div>
+        
+                    <label for="titre">Titre</label>
+                    <input type="text" name="title" id="titre">
+        
                     <label for="category">Catégorie</label>
                     <select type="category" name="category" id="category">
                         <option value="" disabled selected hidden></option>
-                        <option value="categorie 1">1</option>
-                        <option value="categorie 2">2</option>
+                        <option value="1" >Objets</option>
+                        <option value="2" >Hôtels</option>
                     </select>
-
-                    <option value=""></option>
-
+        
                     <hr class="hrAddPhoto">
-                    <input type="submit" value="Valider">
+
+                    <input id="envoyerBtn" class="validerInput" type="submit" value="Valider">
+                
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+
+            <div class="modalHeader">
+                <span class="returnBtn"><i class="fa-solid fa-arrow-left fa-xl"></i></span>
+                <span class="closeBtn"><i class="fa-solid fa-xmark fa-xl"></i></span>
+            </div>
+
+            <h3 class="modalTitle">Ajout photo</h3>
+
+            <div class="imgUploadForm">
+                <form method="post">
+                    <fieldset class="uploadPhotoForm">
+                        <label for="fileUpload" class="fileUploadLabel" ><i class="fa-regular fa-image fa-4x uploadImgIcon"></i></label>
+                        <button type="button" id="fileUploadButton" class="fileUploadBtn">+ Ajouter photo</button>
+                        <input type="file" accept=".jpg, .jpeg, .png" id="fileUpload" name="image">
+                        <img class="previewDisplay" src="" alt="preview Uploaded Image" id="filePreview">
+                        <div class="infoPhoto">jpg, png : 4mo max</div>
+                    </fieldset>
+        
+                    <label for="titre">Titre</label>
+                    <input type="text" name="title" id="titre">
+        
+                    <label for="category">Catégorie</label>
+                    <select type="category" name="category" id="category">
+                        <option value="" disabled selected hidden></option>
+                        <option value="1" >Objets</option>
+                        <option value="2" >Hôtels</option>
+                    </select>
+        
+                    <hr class="hrAddPhoto">
+
+                    <input id="envoyerBtn" class="validerInput" type="submit" value="Valider">
+                
                 </form>
             </div>
         </div>

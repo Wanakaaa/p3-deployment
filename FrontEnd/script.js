@@ -4,20 +4,13 @@ const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
 const divBtn = document.createElement("div");
 
-
-
 if (userData) {
     createEditionBanner()
     replaceLoginByLogOut()
     addModifierEdition()
 
     const lienModifierWorks = document.querySelector('#portfolio h2 a');
-    
-
     lienModifierWorks.addEventListener('click', openModal);
-    // Remplacer createModal par openModal ? 
-    // Juste appeler create modal quand openModal est appelée
-
 
 } else {
     portfolio.appendChild(divBtn);
@@ -25,7 +18,6 @@ if (userData) {
     // Add class btns-portfolio 
     divBtn.classList.add('btns-portfolio');
 }
-
 
 // Modification pour mode édition
 function createEditionBanner () {
@@ -60,7 +52,7 @@ function openModal() {
     container.classList.add('container');
     const modalHTML =
     `
-        <div id="simpleModal" class="modal">
+        <div id="modal" class="modal">
         <div class="modal-content">
         
         </div>
@@ -68,8 +60,6 @@ function openModal() {
     `;
 
     container.innerHTML = modalHTML;
-
-    
     portfolio.appendChild(container)
 
     const modal = document.querySelector('.modal');
@@ -94,21 +84,17 @@ function setGalleryModal() {
         <button class="btnAddImg" type="submit">Ajouter une photo</button>
     `;
     getWorksModal();
-    
-
 }
 
 function closeBtnModal() {
     const modal = document.querySelector('.modal')
     modal.style.display = "none";
-
 }
 
 function outsideClick(event){
     const modal = document.querySelector('.modal')
     if(event.target == modal){
-        modal.style.display = "none";
-        
+        modal.style.display = "none";       
     }
 }
 
@@ -160,6 +146,9 @@ function addNewImg() {
             <br>
             <h3 class="titreModal">Ajout photo</h3>
             <div class="AddImgModal">
+
+
+
                 <div>
                     <i class="fa-regular fa-image imgIcon"></i>
                 </div>
