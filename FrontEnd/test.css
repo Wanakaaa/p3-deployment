@@ -71,7 +71,7 @@
 }
 
 .imgUploadForm form {
-    border: 2px solid grey;
+    outline: 2px solid grey;
     width: 420px;
     display: flex;
     flex-direction: column;
@@ -132,6 +132,39 @@
     line-height: 11.73px;
     color: #444444;
 }
+
+.inputFields {
+    border: 2px solid purple;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+
+.inputFields label {
+	margin: 2em 0 1em 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
+    color: #3d3d3d;
+}
+
+.inputFields input, .inputFields select {
+	height: 50px;
+	font-size: 14px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#category {
+    border: 2px solid blue;
+    width: 100%;
+    color: red;
+    padding-right: 15px;
+}
+
 
 
 

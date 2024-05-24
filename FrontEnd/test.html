@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Grid pour les images</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./test.css">
-    <script src="https://kit.fontawesome.com/cca2fd5ffb.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./test.css" />
+    <script
+      src="https://kit.fontawesome.com/cca2fd5ffb.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="test.js" defer></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- OG  
         <div id="modal" class="modal">
         <div class="modal-content">
@@ -52,43 +57,65 @@
     </div> -->
 
     <div id="modal" class="modal">
-        <div class="modal-content">
-
-            <div class="modalHeader">
-                <span class="returnBtn"><i class="fa-solid fa-arrow-left fa-xl"></i></span>
-                <span class="closeBtn"><i class="fa-solid fa-xmark fa-xl"></i></span>
-            </div>
-
-            <h3 class="modalTitle">Ajout photo</h3>
-
-            <div class="imgUploadForm">
-                <form method="post">
-                    <fieldset class="uploadPhotoForm">
-                        <label for="fileUpload" class="fileUploadLabel" ><i class="fa-regular fa-image fa-4x uploadImgIcon"></i></label>
-                        <button type="button" id="fileUploadButton" class="fileUploadBtn">+ Ajouter photo</button>
-                        <input type="file" accept=".jpg, .jpeg, .png" id="fileUpload" name="image">
-                        <img class="previewDisplay" src="" alt="preview Uploaded Image" id="filePreview">
-                        <div class="infoPhoto">jpg, png : 4mo max</div>
-                    </fieldset>
-        
-                    <label for="titre">Titre</label>
-                    <input type="text" name="title" id="titre">
-        
-                    <label for="category">Catégorie</label>
-                    <select type="category" name="category" id="category">
-                        <option value="" disabled selected hidden></option>
-                        <option value="1" >Objets</option>
-                        <option value="2" >Hôtels</option>
-                    </select>
-        
-                    <hr class="hrAddPhoto">
-
-                    <input id="envoyerBtn" class="validerInput" type="submit" value="Valider">
-                
-                </form>
-            </div>
+      <div class="modal-content">
+        <div class="modalHeader">
+          <span class="returnBtn"
+            ><i class="fa-solid fa-arrow-left fa-xl"></i
+          ></span>
+          <span class="closeBtn"><i class="fa-solid fa-xmark fa-xl"></i></span>
         </div>
-    </div>
 
-</body>
+        <h3 class="modalTitle">Ajout photo</h3>
+
+        <div class="imgUploadForm">
+          <form method="post">
+            <fieldset class="uploadPhotoForm">
+              <label for="fileUpload" class="fileUploadLabel"
+                ><i class="fa-regular fa-image fa-4x uploadImgIcon"></i
+              ></label>
+              <button type="button" id="fileUploadButton" class="fileUploadBtn">
+                + Ajouter photo
+              </button>
+              <input
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                id="fileUpload"
+                name="image"
+              />
+              <img
+                class="previewDisplay"
+                src=""
+                alt="preview Uploaded Image"
+                id="filePreview"
+              />
+              <div class="infoPhoto">jpg, png : 4mo max</div>
+            </fieldset>
+
+            <fieldset class="inputFields">
+              <label for="titre">Titre</label>
+              <input type="text" name="title" id="titre" />
+
+              <label for="category">Catégorie</label>
+              <div>
+                <select type="category" name="category" id="category">
+                  <option value="" disabled selected hidden></option>
+                  <option value="1">Objets</option>
+                  <option value="2">Hôtels</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <hr class="hrAddPhoto" />
+
+            <input
+              id="envoyerBtn"
+              class="validerInput"
+              type="submit"
+              value="Valider"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
