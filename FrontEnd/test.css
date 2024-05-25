@@ -81,6 +81,7 @@
 
 .uploadPhotoForm {
   border: 2px solid purple;
+  height: 169px;
   box-sizing: border-box;
   margin: 0;
   display: flex;
@@ -123,10 +124,6 @@
   display: none;
 }
 
-.previewDisplay {
-  display: none;
-}
-
 .infoPhoto {
   font-size: 10px;
   font-weight: 400;
@@ -161,6 +158,7 @@
 
 .inputFields div {
   padding-bottom: 39px;
+  border: none;
 }
 
 #category {
@@ -175,16 +173,53 @@
 }
 
 .validerInput {
+  font-family: 'Syne' sans-serif;
   margin: 0 auto;
-  margin-bottom: ;
   border: none;
   height: 36px;
   width: 237px;
   font-size: 14px;
-  color: white;
+  color: #FFFFFF;
   background: #a7a7a7;
   width: 180px;
   text-align: center;
   border-radius: 60px;
   cursor: pointer;
+}
+
+.validerPreviewInput {
+  font-family: 'Syne' sans-serif;
+  margin: 0 auto;
+  border: none;
+  height: 36px;
+  width: 237px;
+  font-size: 14px;
+  color: #FFFFFF;
+  background: #1D6154;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+  cursor: pointer;
+}
+
+.imgPreviewContainer {
+  outline: 5px solid orange;
+  width: 420px;
+  height: 169px;
+  position: relative;
+  overflow: hidden;
+  background-color: #E8F1F6;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.imgPreview {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 193px;
+  width: 129px;
+  object-fit : cover;
 }
