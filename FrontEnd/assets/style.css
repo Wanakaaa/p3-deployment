@@ -505,6 +505,11 @@ footer nav ul {
   #fileUpload {
 	display: none;
   }
+
+  #errorMissingFile {
+	color: red;
+	display: none;
+  }
   
   .infoPhoto {
 	font-size: 10px;

@@ -164,26 +164,25 @@ function addNewWork() {
         <label for="fileUpload" class="fileUploadLabel">
           <i class="fa-regular fa-image fa-4x uploadImgIcon"></i>
         </label>
-        <button type="button" id="fileUploadButton" class="fileUploadBtn">
-          + Ajouter photo
-        </button>
+        <input type="button" id="fileUploadButton" class="fileUploadBtn" value="+ Ajouter photo" required/>
         <input
-          type="file"
-          accept=".jpg, .jpeg, .png"
-          id="fileUpload"
-          name="image"
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            id="fileUpload"
+            name="image"
         />
         <div class="infoPhoto">jpg, png : 4mo max</div>
+        <div id="errorMissingFile">Merci d'ajouter une image</div> 
       </fieldset>
       <span id="displayPreviewContainer"></span>
 
       <fieldset class="inputFields">
         <label for="titre">Titre</label>
-        <input type="text" name="title" id="titleWork" />
+        <input type="text" name="title" id="titleWork" required/>
 
         <label for="category">Catégorie</label>
         <div>
-          <select type="category" name="category" id="category">
+          <select type="category" name="category" id="category" required>
             <option value="" disabled selected hidden></option>
           </select>
         </div>
@@ -265,6 +264,15 @@ function fetchNewWork() {
     const formData = new FormData(formModal);
     const categoryId = document.querySelector('#category').value;
     formData.set('category', categoryId)
+
+    const fileInput = document.getElementById('fileUpload');
+    const errorMessage = document.getElementById('errorMissingFile');
+
+    if (!fileInput.files.length) {
+        errorMessage.style.display = 'block';
+    } else {
+        errorMessage.style.display = 'none';
+    }
 
     fetch("http://localhost:5678/api/works", {
         method: "POST",
