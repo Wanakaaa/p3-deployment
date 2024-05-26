@@ -2,6 +2,7 @@
   font-family: "Work Sans", sans-serif;
 }
 
+/* ok */
 .modal {
   border: 5px solid blue;
   position: fixed;
@@ -14,6 +15,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* ok */
 .modal-content {
   border: 3px solid red;
   background-color: #ffffff;
@@ -27,6 +29,7 @@
   border-radius: 10px;
 }
 
+/* ok */
 .modalHeader {
   border: 2px solid blue;
   width: 100%;
@@ -37,6 +40,7 @@
   box-sizing: border-box;
 }
 
+/* ok */
 .returnBtn i {
   border: 2px solid pink;
   width: 21px;
@@ -46,6 +50,7 @@
   justify-content: center;
 }
 
+/* ok */
 .closeBtn i {
   border: 2px solid pink;
   width: 24px;
@@ -55,17 +60,20 @@
   justify-content: center;
 }
 
+/* ok */
 .closeBtn:hover,
 .closeBtn:focus {
   text-decoration: none;
   cursor: pointer;
 }
 
+/* ok */
 .returnBtn:hover,
 .returnBtn:focus {
   cursor: pointer;
 }
 
+/* ok */
 .modalTitle {
   font-weight: 400;
   font-size: 26px;

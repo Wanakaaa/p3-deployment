@@ -50,7 +50,7 @@ table {
 body {
 	max-width: 1140px;
 	margin:auto;
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans', sans-serif ;
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
@@ -296,7 +296,7 @@ footer nav ul {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content{
+/* .modal-content{
 	border: 3px solid red;
     background-color: #f4f4f4;
     margin: 20% auto;
@@ -307,14 +307,72 @@ footer nav ul {
 	align-items: center;
 	padding: 10px 0 45px 0;
 	border-radius: 10px;
+} */
 
+.modal-content {
+	border: 3px solid red;
+	background-color: #ffffff;
+	margin: 20% auto;
+	width: 70%;
+	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px 0 55px 0;
+	border-radius: 10px;
 }
 
+.modalHeader {
+	border: 2px solid blue;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 30px 0 30px;
+	box-sizing: border-box;
+}
+
+.returnBtn i {
+	border: 2px solid pink;
+	width: 21px;
+	height: 21px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.closeBtn i {
+	border: 2px solid pink;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.returnBtn:hover, .returnBtn:focus {
+	cursor: pointer;
+}
+
+.modalTitle {
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30.5px;
+}
+
+/* juste pour la gallery, pas la page ajout work */
 .galleryModal {
+	width: 420px;
     border: 2px solid purple;
     display: flex;
     flex-wrap: wrap;
-	padding: 0px 105px;
+	/* padding: 0px 105px; */
 }
 
 .galleryModal div {
@@ -328,7 +386,7 @@ footer nav ul {
     height: auto;
 }
 
-.closeBtn {
+/* .closeBtn {
 	border: 2px solid green;
     color: #000000;
     font-size: 30px;
@@ -336,20 +394,22 @@ footer nav ul {
 	box-sizing: border-box;
 	text-align: end;
 	padding: 0 30px;
-}
+} */
 
-.closeBtn i:hover, .closeBtn i:focus {
+/* .closeBtn i:hover, .closeBtn i:focus {
 	text-decoration: none;
 	cursor: pointer;
-}
+} */
 
-.titreGallery {
+
+
+/* .titreGallery {
 	font-family: "Work Sans", sans-serif;
 	font-size: 26px;
 	font-weight: 400;
 	text-align: center;
 	padding: 10px 0 46px 0;
-}
+} */
 
 .btnAddImg {
 	width: 25%;
@@ -368,7 +428,7 @@ footer nav ul {
 	cursor: pointer;
 }
 
-hr {
+.hrGalleryModal {
 	border-top: 1px solid #B3B3B3;
 	width: 70%;
 }
@@ -390,8 +450,164 @@ hr {
 	cursor: pointer;
 }
 
+/* juste pour la gallery, pas la page ajout work */
+
+/* page ajout Work */
+
+.imgUploadForm form {
+	outline: 2px solid grey;
+	width: 420px;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .uploadPhotoForm {
+	border: 2px solid purple;
+	height: 169px;
+	box-sizing: border-box;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #e8f1f6;
+	border-radius: 3px;
+	padding: 13px 0 19px 0;
+  }
+  
+  .fileUploadLabel {
+	width: 76px;
+	height: 76px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .uploadImgIcon {
+	color: #cbd6dc;
+  }
+  
+  .fileUploadBtn {
+	margin: 6px 0 7px 0;
+	height: 36px;
+	text-decoration: none;
+	background-color: #cbd6dc;
+	color: #306685;
+	border: none;
+	text-align: center;
+	border-radius: 50px;
+	padding: 0px 30px 0px 30px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.42px;
+	cursor: pointer;
+  }
+  
+  #fileUpload {
+	display: none;
+  }
+  
+  .infoPhoto {
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 11.73px;
+	color: #444444;
+  }
+  
+  .inputFields {
+	border: 2px solid purple;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+  }
+  
+  .inputFields label {
+	padding: 21px 0 10px 0;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: "Work Sans", sans-serif;
+	color: #3d3d3d;
+  }
+  
+  .inputFields input,
+  .inputFields select {
+	height: 50px;
+	font-size: 14px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  }
+  
+  .inputFields div {
+	padding-bottom: 39px;
+	border: none;
+  }
+  
+  #category {
+	border: 2px solid blue;
+	width: 100%;
+	color: red;
+	padding-right: 15px;
+  }
+  
+  .hrAddPhoto {
+	width: 100%;
+  }
+  
+  .validerInput {
+	font-family: 'Syne' sans-serif;
+	margin: 0 auto;
+	border: none;
+	height: 36px;
+	width: 237px;
+	font-size: 14px;
+	color: #FFFFFF;
+	background: #a7a7a7;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+  }
+  
+  .validerPreviewInput {
+	font-family: 'Syne' sans-serif;
+	margin: 0 auto;
+	border: none;
+	height: 36px;
+	width: 237px;
+	font-size: 14px;
+	color: #FFFFFF;
+	background: #1D6154;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+  }
+  
+  .imgPreviewContainer {
+	outline: 5px solid orange;
+	width: 420px;
+	height: 169px;
+	position: relative;
+	overflow: hidden;
+	background-color: #E8F1F6;
+	padding: 0;
+	margin: 0;
+	border: none;
+  }
+  
+  .imgPreview {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 193px;
+	width: 129px;
+	object-fit : cover;
+  }
+
 /* Ajout Photo */
-.AddImgModal {
+/* .AddImgModal {
     width: 420px;
     background-color: #E8F1F6;
     display: flex;
@@ -489,12 +705,12 @@ hr {
 	text-align: center;
 	border-radius: 60px ;
     cursor: pointer;
-}
-.returnBtn i:hover, .returnBtn i:focus {
+} */
+/* .returnBtn i:hover, .returnBtn i:focus {
     cursor: pointer;
-}
+} */
 
-.titreModal {
+/* .titreModal {
     font-family: "Work Sans", sans-serif;
 	font-size: 26px;
     font-weight: 400;
@@ -502,8 +718,8 @@ hr {
 	text-align: center;
     margin: 0;
     padding-bottom: 36px;
-}
-
+} */
+/* 
 .returnClose {
     border: 2px solid blue;
     width: 100%;
@@ -516,4 +732,4 @@ hr {
     font-size: 30px;
     font-weight: bold;
     padding: 0 30px 0 30px;
-}
+} */

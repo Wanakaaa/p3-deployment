@@ -1,32 +1,5 @@
 const userData = JSON.parse(sessionStorage.getItem("user"));
 const form = document.querySelector('form');
-
-
-form.addEventListener('submit', (event)=> {
-    event.preventDefault()
-    const formData = new FormData(form);
-    const fileInput = document.getElementById('fileUpload');
-    const file = fileInput.files[0];
-    formData.set('image', file);
-
-    fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-            'Authorization': `Bearer ${userData.token}`
-        },
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => console.log('succes', data))
-
-    .catch(error => console.error('error', error))
-})
-
 const uploadBtn = document.querySelector('.fileUploadBtn');
 const fileInput = document.getElementById('fileUpload');
 
@@ -66,4 +39,33 @@ function displayPreviewHTML() {
     `;
     spanDisplayPreviwContainer.appendChild(document.getElementById('fileUpload'))
 }
+
+
+form.addEventListener('submit', (event)=> {
+    event.preventDefault()
+    fetchNewWork()
+})
+
+function fetchNewWork() {
+    const formData = new FormData(form);
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            'Authorization': `Bearer ${userData.token}`
+        },
+        body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => console.log('succes', data))
+
+        .catch(error => console.error('error', error))
+}
+
+
 

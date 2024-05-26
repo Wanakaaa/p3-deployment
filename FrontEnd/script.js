@@ -33,8 +33,20 @@ function createEditionBanner () {
 }
 
 function replaceLoginByLogOut(){
-    const liLogin = document.querySelector('nav ul li > a[href="./login.html"]');
-    liLogin.innerText = 'Logout';
+    const liLogin = document.querySelectorAll('nav ul li')[2];
+    liLogin.setAttribute("id", "loginBtn")
+    liLogin.innerHTML = `
+    <a id="logoutBtn" href="./index.html"> logout</a>
+    `
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', logOut)
+}
+
+function logOut(){
+    sessionStorage.clear();
+    const liLogout = document.getElementById('loginBtn');
+    liLogout.innerText = 'Login'
 }
 
 // function logOut()
@@ -76,27 +88,21 @@ function openModal() {
 function setGalleryModal() {
     const modalContent = document.querySelector('.modal-content');
     modalContent.innerHTML = `
-        <span  class="closeBtn"><i class="fa-solid fa-xmark fa-sm"></i></span> <br>
-        <h3 class="titreGallery">Galerie photo</h3>
-        <div class= "galleryModal">
+        <div class="modalHeader">
+            <span class="closeBtn">
+                <i class="fa-solid fa-xmark fa-xl"></i>
+            </span>
         </div>
-        <hr>
+
+        <h3 class="modalTitle">Ajout photo</h3>
+        <div class= "galleryModal"></div>
+        <hr class="hrGalleryModal" >
         <button class="btnAddImg" type="submit">Ajouter une photo</button>
     `;
     getWorksModal();
 }
 
-function closeBtnModal() {
-    const modal = document.querySelector('.modal')
-    modal.style.display = "none";
-}
 
-function outsideClick(event){
-    const modal = document.querySelector('.modal')
-    if(event.target == modal){
-        modal.style.display = "none";       
-    }
-}
 
 // Récupérer toutes les travaux de l'API pour la modal
 function getWorksModal(){
@@ -129,79 +135,187 @@ function updateGalleryModal(works) {
         });
         //Add eventListener sur button btnAddImg
         const btnAddImg = document.querySelector('.btnAddImg');
-        btnAddImg.addEventListener('click', addNewImg);
+        btnAddImg.addEventListener('click', addNewWork);
         
     } else {
         console.log('erreur')
     }
 }
 
-function addNewImg() {
+// J'en suis la ---- Attention ligne 134, addNewImg est en commentaire
+
+
+function addNewWork() {
     let modalContent = document.querySelector('.modal-content');
     modalContent.innerHTML = `
-    <div class="returnClose">
-                <span class="returnBtn"><i class="fa-solid fa-arrow-left fa-sm"></i></span>
-                <span class="closeBtn"><i class="fa-solid fa-xmark fa-sm"></i></span>
-            </div>
-            <br>
-            <h3 class="titreModal">Ajout photo</h3>
-            <div class="AddImgModal">
+    <div class="modalHeader">
+          <span class="returnBtn"
+            ><i class="fa-solid fa-arrow-left fa-xl"></i
+          ></span>
+          <span class="closeBtn"><i class="fa-solid fa-xmark fa-xl"></i></span>
+    </div>
 
+    <h3 class="modalTitle">Ajout photo</h3>
 
+    
+    <div class="imgUploadForm">
+    <form id="formModal" method="post">
+      <fieldset id="photoFieldset" class="uploadPhotoForm">
+        <label for="fileUpload" class="fileUploadLabel">
+          <i class="fa-regular fa-image fa-4x uploadImgIcon"></i>
+        </label>
+        <button type="button" id="fileUploadButton" class="fileUploadBtn">
+          + Ajouter photo
+        </button>
+        <input
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          id="fileUpload"
+          name="image"
+        />
+        <div class="infoPhoto">jpg, png : 4mo max</div>
+      </fieldset>
+      <span id="displayPreviewContainer"></span>
 
-                <div>
-                    <i class="fa-regular fa-image imgIcon"></i>
-                </div>
-                    <div><button class="addPhoto">+ Ajouter photo</button></div>
-                    <div class="infoPhoto">jpg, png : 4mo max</div>
-            </div>
-            <div class="formAjoutPhoto">
-                <form action="#" method="post">
-                    <label for="titre">Titre</label>
-                    <input type="text" name="titre" id="titre">
+      <fieldset class="inputFields">
+        <label for="titre">Titre</label>
+        <input type="text" name="title" id="titleWork" />
 
-                    <label for="category">Catégorie</label>
-                    <select type="category" name="category" id="category">
-                        <option value="" disabled selected hidden></option>
-                    </select>
+        <label for="category">Catégorie</label>
+        <div>
+          <select type="category" name="category" id="category">
+            <option value="" disabled selected hidden></option>
+          </select>
+        </div>
+      </fieldset>
 
-                    <hr class="hrAddPhoto">
-                    <input class="validerInput" type="submit" value="Valider">
-                </form>
-            </div>
+      <hr class="hrAddPhoto" />
+
+      <input id="envoyerBtn" class="validerInput" type="submit" value="Valider"
+      />
+    </form>
+  </div>
     `;
 
-    //Je dois récupérer mes catégories dynamiquement 
-    const selectCategory = document.getElementById('category');
-    for (let i= 0; i < categoriesGlobal.length; i++) {
-        let categoryChoice = document.createElement('option')
-        categoryChoice.classList.add('catChoice');
-        categoryChoice.dataset.value = `categorie${categoriesGlobal[i].id}`;
-        categoryChoice.innerText = `${categoriesGlobal[i].name}`
-        selectCategory.appendChild(categoryChoice)
-    }
+    const modalHeader = document.querySelector('.modalHeader');
+    modalHeader.style.justifyContent = "space-between";
 
+    getCategories()
+    
     const closeBtn = document.querySelector('.closeBtn i');
     closeBtn.addEventListener('click', closeBtnModal);
 
     const returnBtn = document.querySelector('.returnBtn i');
     returnBtn.addEventListener('click', returnGalleryModal);
 
-    const addPhoto = document.querySelector('.addPhoto');
-    addPhoto.addEventListener('click', ()=> console.log('cliqué addPhoto'))
+    setupFileUpload()
 
-    const validerInput = document.querySelector('.validerInput');
-    validerInput.addEventListener('click', (event)=> {
+    const formModal = document.getElementById('formModal');
+    formModal.addEventListener('submit', (event) => {
         event.preventDefault()
-        console.log('cliqué validerInput')
+        fetchNewWork()
     })
+
 }
+
+function setupFileUpload() {
+    const uploadBtn = document.querySelector('.fileUploadBtn');
+    const fileInput = document.getElementById('fileUpload');
+
+    uploadBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        fileInput.click();
+})
+
+fileInput.addEventListener('change', previewPhoto);
+}
+
+function previewPhoto() {
+    const fileInput = document.getElementById('fileUpload');
+    const file = fileInput.files[0];
+    if (file) {
+        displayPreviewHTML()
+        const fileReader = new FileReader()
+            const preview = document.getElementById('filePreview');
+            fileReader.onload = event => {
+                preview.setAttribute('src', event.target.result);
+            }
+            fileReader.readAsDataURL(file);
+    }
+}
+
+function displayPreviewHTML() {
+    const uploadPhotoForm = document.getElementById('photoFieldset');
+    uploadPhotoForm.style.display = "none";
+    const spanDisplayPreviwContainer = document.getElementById('displayPreviewContainer')
+    spanDisplayPreviwContainer.classList.add('imgPreviewContainer');
+    spanDisplayPreviwContainer.innerHTML = `
+        <img
+        class="imgPreview"
+        src=""
+        alt=""
+        id="filePreview"
+        >
+    `;
+    spanDisplayPreviwContainer.appendChild(document.getElementById('fileUpload'))
+}
+
+function fetchNewWork() {
+    const formModal = document.getElementById('formModal');
+    const formData = new FormData(formModal);
+    const categoryId = document.querySelector('#category').value;
+    formData.set('category', categoryId)
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            'Authorization': `Bearer ${userData.token}`
+        },
+        body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('succes', data)
+            displayWorks()
+        })
+        .catch(error => console.error('error', error))
+}
+
+
+function getCategories() {
+    const selectCategory = document.getElementById('category');
+    for (let i= 0; i < categoriesGlobal.length; i++) {
+        let categoryChoice = document.createElement('option')
+        categoryChoice.classList.add('catChoice');
+        categoryChoice.value = `${categoriesGlobal[i].id}`;
+        categoryChoice.innerText = `${categoriesGlobal[i].name}`
+        selectCategory.appendChild(categoryChoice)
+    }
+}
+
 
 
 function returnGalleryModal() {
     const modalContent = document.querySelector('.modal-content');
     modalContent.innerHTML = "";
     openModal()
+}
+
+function closeBtnModal() {
+    const modal = document.querySelector('.modal')
+    modal.style.display = "none";
+}
+
+function outsideClick(event){
+    const modal = document.querySelector('.modal')
+    if(event.target == modal){
+        modal.style.display = "none";       
+    }
 }
 
 function deleteWork(id) {
