@@ -1,3 +1,4 @@
+// Récupère les infos user dans le sessionStorage
 const userData = JSON.parse(sessionStorage.getItem("user"));
 
 const portfolio = document.getElementById("portfolio");
@@ -19,7 +20,9 @@ if (userData) {
     divBtn.classList.add('btns-portfolio');
 }
 
-// Modification pour mode édition
+displayWorks();
+
+// Modification pour mode édition OK
 function createEditionBanner () {
     const html = document.querySelector('html');
     const body = document.querySelector('body');
@@ -32,6 +35,7 @@ function createEditionBanner () {
     html.insertBefore(banner, body)
 }
 
+//OK
 function replaceLoginByLogOut(){
     const liLogin = document.querySelectorAll('nav ul li')[2];
     liLogin.setAttribute("id", "loginBtn")
@@ -43,14 +47,14 @@ function replaceLoginByLogOut(){
     logoutBtn.addEventListener('click', logOut)
 }
 
+//ok
 function logOut(){
     sessionStorage.clear();
     const liLogout = document.getElementById('loginBtn');
     liLogout.innerText = 'Login'
 }
 
-// function logOut()
-
+//ok
 function addModifierEdition() {
     const portfolioH2 = document.querySelector('#portfolio h2');
     const lienModifierWorksHTML = `<a class="differente" href="#"><i class="fa-regular fa-pen-to-square"></i> Modifier</a>`;
@@ -142,10 +146,8 @@ function updateGalleryModal(works) {
     }
 }
 
-// J'en suis la ---- Attention ligne 134, addNewImg est en commentaire
 
-
-function addNewWork() {
+function addNewWorkHTML() {
     let modalContent = document.querySelector('.modal-content');
     modalContent.innerHTML = `
     <div class="modalHeader">
@@ -195,6 +197,11 @@ function addNewWork() {
     </form>
   </div>
     `;
+}
+
+
+function addNewWork() {
+    addNewWorkHTML()
 
     const modalHeader = document.querySelector('.modalHeader');
     modalHeader.style.justifyContent = "space-between";
@@ -344,7 +351,7 @@ function deleteWork(id) {
     .catch(error => console.error('Error', error));
 } 
 
-// Récupération des catégories
+// Récupération des catégories OK
 let categoriesGlobal = [];
 fetch("http://localhost:5678/api/categories")
     .then((response) => response.json())
@@ -354,7 +361,7 @@ fetch("http://localhost:5678/api/categories")
         // console.log(categoriesGlobal);
     });
 
-// Récupération de l'ensemble des travaux, ajout à la gallery
+// Récupération de l'ensemble des travaux, ajout à la gallery OK
 let worksGlobal = [];
 function displayWorks(){
     fetch("http://localhost:5678/api/works")
@@ -366,9 +373,9 @@ function displayWorks(){
         });
 }
 
-displayWorks()
 
-// Création des boutons de catégories
+
+// Création des boutons de catégories OK
 function updateBtn(categories) {
     // Pour le bouton Tous
     const btnTous = document.createElement("button");
@@ -411,7 +418,7 @@ function updateGallery(works) {
 }
 
 
-
+//OK
 function filterCategory(array, categorieId) {
     const categoryList = array.filter((work) => work.categoryId == categorieId);
     return categoryList;
