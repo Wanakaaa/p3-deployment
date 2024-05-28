@@ -321,11 +321,13 @@ function returnGalleryModal() {
     openModal()
 }
 
+// ok
 function closeBtnModal() {
     const modal = document.querySelector('.modal')
     modal.style.display = "none";
 }
 
+// ok
 function outsideClick(event){
     const modal = document.querySelector('.modal')
     if(event.target == modal){
