@@ -204,7 +204,7 @@ function updateGalleryModal(works) {
             galleryModal.appendChild(workElement);
             addDeleteEventListener(work)
         });
-        // addNewWorkEventListener()        
+        addNewWorkEventListener()        
     } else {
         throw new Error('Erreur')
     }
@@ -255,12 +255,105 @@ function addDeleteEventListener(work) {
                 .catch(error => console.error('Error', error));
             }
 
+            // A TESTER
+            // async function deleteWork(id) {
+            //     try {
+            //         const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            //             method: 'DELETE',
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //                 'Authorization': `Bearer ${userData.token}`
+            //             }
+            //         });
+            
+            //         if (!response.ok) {
+            //             throw new Error('Erreur lors de la suppression du travail');
+            //         }
+            
+            //         console.log(`Work ${id} deleted`);
+            
+            //         const works = await getWorks(); // Attendre la liste mise à jour des travaux
+            //         displayWorks(); // Mettre à jour la galerie principale
+            //         updateGalleryModal(works); // Mettre à jour la galerie modale
+            //     } catch (error) {
+            //         console.error('Error', error);
+            //     }
+            // }
 
-                function addNewWorkEventListener() {
-                    const btnAddImg = document.querySelector('.btnAddImg');
-                    btnAddImg.addEventListener('click', addNewWork);
-                }
 
+function addNewWorkEventListener() {
+    const btnAddImg = document.querySelector('.btnAddImg');
+    btnAddImg.addEventListener('click', () => addNewWork());
+}
+
+            function addNewWork() {
+                setNewWork()
+            }
+
+                    function setNewWork() {
+                        let modalContent = document.querySelector('.modal-content')
+                        modalContent.innerHTML = `
+                        <div class="modalHeader">
+                              <span class="returnBtn"
+                                ><i class="fa-solid fa-arrow-left fa-xl"></i
+                              ></span>
+                              <span class="closeBtn"><i class="fa-solid fa-xmark fa-xl"></i></span>
+                        </div>
+                    
+                        <h3 class="modalTitle">Ajout photo</h3>
+                    
+                        
+                        <div class="imgUploadForm">
+                        <form id="formModal" method="post">
+                          <fieldset id="photoFieldset" class="uploadPhotoForm">
+                            <label for="fileUpload" class="fileUploadLabel">
+                              <i class="fa-regular fa-image fa-4x uploadImgIcon"></i>
+                            </label>
+                            <input type="button" id="fileUploadButton" class="fileUploadBtn" value="+ Ajouter photo" required/>
+                            <input
+                                type="file"
+                                accept=".jpg, .jpeg, .png"
+                                id="fileUpload"
+                                name="image"
+                            />
+                            <div class="infoPhoto">jpg, png : 4mo max</div>
+                            <div id="errorMissingFile">Merci d'ajouter une image</div> 
+                          </fieldset>
+                          <span id="displayPreviewContainer"></span>
+                    
+                          <fieldset class="inputFields">
+                            <label for="titre">Titre</label>
+                            <input type="text" name="title" id="titleWork" required/>
+                    
+                            <label for="category">Catégorie</label>
+                            <div>
+                              <select type="category" name="category" id="category" required>
+                                <option value="" disabled selected hidden></option>
+                              </select>
+                            </div>
+                          </fieldset>
+                    
+                          <hr class="hrAddPhoto" />
+                    
+                          <input id="envoyerBtn" class="validerInput" type="submit" value="Valider"
+                          />
+                        </form>
+                      </div>
+                        `;
+                        addEventListenerCloseModal()
+                        addEventListenerReturn()
+                    }
+
+                            function addEventListenerReturn() {
+                                const returnBtn = document.querySelector('.returnBtn')
+                                returnBtn.addEventListener('click', () => returnGalleryModal())
+                            }
+
+                                    function returnGalleryModal() {
+                                        let modalContent = document.querySelector('.modal-content');
+                                        modalContent = '';
+                                        openModal()
+                                    }
 
 //Close la modal
 function addEventListenerCloseModal() {
@@ -282,31 +375,3 @@ function addEventListenerCloseModal() {
                 modal.style.display = "none";      
             }
         }
-
-        // function addDeleteEventListener(work) {
-        //     const bin = document.querySelector(`#deleteBtn${work.id}`);
-        //     bin.addEventListener('click', deleteWork(work.id));
-        // }
-
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Open modal
-
-
-// const closeBtn = document.querySelector('.closeBtn i');
-// closeBtn.addEventListener('click', closeBtnModal);
-// window.addEventListener('click', outsideClick);
-
