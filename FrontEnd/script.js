@@ -224,6 +224,7 @@ function addNewWork() {
 
 }
 
+// ok
 function setupFileUpload() {
     const uploadBtn = document.querySelector('.fileUploadBtn');
     const fileInput = document.getElementById('fileUpload');
@@ -236,6 +237,7 @@ function setupFileUpload() {
 fileInput.addEventListener('change', previewPhoto);
 }
 
+// ok 
 function previewPhoto() {
     const fileInput = document.getElementById('fileUpload');
     const file = fileInput.files[0];
@@ -250,6 +252,7 @@ function previewPhoto() {
     }
 }
 
+// ok
 function displayPreviewHTML() {
     const uploadPhotoForm = document.getElementById('photoFieldset');
     uploadPhotoForm.style.display = "none";
@@ -272,6 +275,7 @@ function fetchNewWork() {
     const categoryId = document.querySelector('#category').value;
     formData.set('category', categoryId)
 
+    // gestion de l'erreur 
     const fileInput = document.getElementById('fileUpload');
     const errorMessage = document.getElementById('errorMissingFile');
 
@@ -280,6 +284,7 @@ function fetchNewWork() {
     } else {
         errorMessage.style.display = 'none';
     }
+    // Gestion de l'erreur ^^ 
 
     fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -301,7 +306,7 @@ function fetchNewWork() {
         .catch(error => console.error('error', error))
 }
 
-
+// OK 
 function getCategories() {
     const selectCategory = document.getElementById('category');
     for (let i= 0; i < categoriesGlobal.length; i++) {
@@ -314,7 +319,7 @@ function getCategories() {
 }
 
 
-
+// ok
 function returnGalleryModal() {
     const modalContent = document.querySelector('.modal-content');
     modalContent.innerHTML = "";
@@ -335,6 +340,8 @@ function outsideClick(event){
     }
 }
 
+
+// OK
 function deleteWork(id) {
     fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
@@ -406,7 +413,7 @@ function updateBtn(categories) {
 
 // 1. Définir gallery (en haut)
 // afficher tous les éléments au chargement de la page
-
+// OK
 function updateGallery(works) {
     gallery.innerHTML = "";
     works.forEach((work) => {

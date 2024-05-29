@@ -11,11 +11,12 @@ if(userData) {
     createEditionBanner()
     addUpdateEdition()
     displayWorks()
-    
 } else {
     displayWorks()
     displayBtn()
 }
+
+// ********************* Gestion des works ********************* \\
 
 //Récupérer les Works via l'API 
 function getWorks(){
@@ -49,6 +50,8 @@ function displayWorks(){
     .catch(error => console.error("Une erreur s'est produite", error))
 }
 
+// ********************* Gestion des catégories ********************* \\
+
 //Récupérer les catégories via l'API
 function getCategories(){
     return new Promise(function(resolve, reject){
@@ -64,7 +67,6 @@ function updateBtn(categories, works) {
     portfolio.appendChild(divBtn)
     portfolio.insertBefore(divBtn, gallery)
     divBtn.classList.add('btns-portfolio')
-
     // Pour le bouton Tous
     const btnTous = document.createElement("button");
     btnTous.innerText = "Tous";
@@ -73,7 +75,6 @@ function updateBtn(categories, works) {
     btnTous.addEventListener('click', () => {
         updateGallery(works)
     })
-
     //Pour les autres boutons : pour chaque catégorie, on crée un button, avec EventListener
     // sélectionnant la categoryList créée pour category.id spécifié
     categories.forEach((category) => {
@@ -117,6 +118,7 @@ function replaceLoginByLogOut(){
     logoutBtn.addEventListener('click', logOut)
 }
 
+// Clear le sessionStorage, remplace logout par login /!\ A REVOIR
 function logOut(){
     sessionStorage.clear();
     const liLogout = document.getElementById('loginBtn');
@@ -124,7 +126,6 @@ function logOut(){
 }
 
 // Ajout de la banner + modifier 
-
 function createEditionBanner() {
     const html = document.querySelector('html');
     const body = document.querySelector('body');
@@ -147,7 +148,6 @@ function addUpdateEdition() {
 
 // ***************************** Modal ******************************* \\ 
 
-// A METTRE A JOUR 
 function openModal() {
     createModal()
     setGalleryModal()
@@ -157,7 +157,6 @@ function openModal() {
         })
         .catch(error => console.error("Une erreur s'est produite", error))
 }
-
 
 //Création de la modal
 function createModal() {
@@ -283,14 +282,11 @@ function addDeleteEventListener(work) {
 
 function addNewWorkEventListener() {
     const btnAddImg = document.querySelector('.btnAddImg');
-    btnAddImg.addEventListener('click', () => addNewWork());
+    btnAddImg.addEventListener('click', () => setNewWorkModal());
 }
 
-            function addNewWork() {
-                setNewWork()
-            }
 
-                    function setNewWork() {
+                    function setNewWorkModal() {
                         let modalContent = document.querySelector('.modal-content')
                         modalContent.innerHTML = `
                         <div class="modalHeader">
@@ -335,14 +331,28 @@ function addNewWorkEventListener() {
                     
                           <hr class="hrAddPhoto" />
                     
-                          <input id="envoyerBtn" class="validerInput" type="submit" value="Valider"
+                          <input id="submitNewWork" class="validerInput" type="submit" value="Valider"
                           />
                         </form>
                       </div>
                         `;
+                        changeJustifyContentHeader()
                         addEventListenerCloseModal()
                         addEventListenerReturn()
+                        setCategoriesAddWork()
+                        setupFileUpload()
+                        addEventListenerSubmitInput()
                     }
+
+                            function changeJustifyContentHeader() {
+                                const modalHeader = document.querySelector('.modalHeader')
+                                const returnBtn = document.querySelector('.returnBtn')
+                                if (returnBtn) {
+                                    modalHeader.style.justifyContent = 'space-between'
+                                } else {
+                                    modalHeader.style.justifyContent = 'flex-end'
+                                }
+                            }
 
                             function addEventListenerReturn() {
                                 const returnBtn = document.querySelector('.returnBtn')
@@ -353,6 +363,126 @@ function addNewWorkEventListener() {
                                         let modalContent = document.querySelector('.modal-content');
                                         modalContent = '';
                                         openModal()
+                                    }
+
+                            function setCategoriesAddWork() {
+                                const selectCategory = document.getElementById('category')
+                                getCategories()
+                                    .then(categories => {
+                                        for (let i =0; i < categories.length; i++) {
+                                            let categoryChoice = document.createElement('option')
+                                            categoryChoice.classList.add('catChoice')
+                                            categoryChoice.value = `${categories[i].id}`
+                                            categoryChoice.innerText = `${categories[i].name}`
+                                            selectCategory.appendChild(categoryChoice)
+                                        }
+                                    })
+                                    .catch(error => console.error('Erreur', error))
+                            }
+
+                            function setupFileUpload() {
+                                const uploadBtn = document.querySelector('.fileUploadBtn')
+                                const fileInput = document.getElementById('fileUpload')
+
+                                uploadBtn.addEventListener('click', (event) => {
+                                    event.preventDefault()
+                                    fileInput.click()
+                                })
+                                fileInput.addEventListener('change', () => previewPhoto())
+                            }
+
+                                function previewPhoto(){
+                                    const fileInput = document.getElementById('fileUpload');
+                                    const file = fileInput.files[0];
+                                    if (file) {
+                                        displayPreviewHTML()
+                                        const fileReader = new FileReader()
+                                            const preview = document.getElementById('filePreview');
+                                            fileReader.onload = event => {
+                                                preview.setAttribute('src', event.target.result);
+                                            }
+                                            fileReader.readAsDataURL(file);
+                                    }
+                                }
+
+                                function displayPreviewHTML() {
+                                    const uploadPhotoForm = document.getElementById('photoFieldset');
+                                    uploadPhotoForm.style.display = "none";
+                                    const spanDisplayPreviewContainer = document.getElementById('displayPreviewContainer')
+                                    spanDisplayPreviewContainer.classList.add('imgPreviewContainer');
+                                    spanDisplayPreviewContainer.innerHTML = `
+                                        <img
+                                        class="imgPreview"
+                                        src=""
+                                        alt=""
+                                        id="filePreview"
+                                        >
+                                    `;
+                                    spanDisplayPreviewContainer.appendChild(document.getElementById('fileUpload'))
+                                }
+
+
+            // *** post new work *** \\
+
+    // ajout eventListener sur le bouton envoyer
+    function addEventListenerSubmitInput() {
+        const formPostNewWork = document.getElementById('formModal')
+        formPostNewWork.addEventListener('submit', (event) => {
+            event.preventDefault()
+            sendNewWork()
+        })
+    }
+
+                                function sendNewWork() {
+                                    const formData = getFormData()
+                                    fetchNewWork(formData)
+                                        .then(data => {
+                                            console.log('Envoyé', data)
+                                            displayWorks()
+                                            openModal()
+                                        })
+                                        .catch(error => {
+                                            console.error('erreur', error)
+                                        })
+                                }
+
+                                function getFormData() {
+                                    const formModal = document.getElementById('formModal');
+                                    const formData = new FormData(formModal);
+                                    const categoryId = document.querySelector('#category').value;
+                                    console.log(categoryId)
+                                    formData.set('category', categoryId)
+                                    console.log(formData)
+                                    return formData
+                                }
+
+                                function fetchNewWork(formData) {
+                                    return new Promise(function(resolve, reject) {
+                                        fetch("http://localhost:5678/api/works", {
+                                            method: "POST",
+                                            headers: {
+                                                'Authorization': `Bearer ${userData.token}`
+                                            },
+                                            body: formData
+                                            })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    return response.json()
+                                                } else {
+                                                    throw new Error(`Error status : ${response.status}`)
+                                                }
+                                            })
+                                            .then(data => resolve(data))
+                                            .catch(error => reject(error))
+                                    })
+                                }
+
+                                function handlePostNewWorkSuccess(){
+                                    console.log('New work envoyé')
+                                }
+
+                                    function handlePostNewWorkError(error){
+                                        console.log('pas marché :', error)
                                     }
 
 //Close la modal
