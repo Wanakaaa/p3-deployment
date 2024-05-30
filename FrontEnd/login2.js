@@ -65,25 +65,5 @@ function displayLoginError(error) {
 
 function handleLoginSuccess(response) {
     sessionStorage.setItem("user", JSON.stringify(response));
-    replaceLoginByLogOut()
     window.location.href = "index.html";
-}
-
-
-//EXPORT IMPORT ?? non car innerHTML href login et pas index
-function replaceLoginByLogOut(){
-    const liLogin = document.querySelectorAll('nav ul li')[2];
-    liLogin.setAttribute("id", "loginBtn")
-    liLogin.innerHTML = `
-    <a id="logoutBtn" href="./login.html"> logout</a>
-    `
-
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', logOut)
-}
-
-function logOut(){
-    sessionStorage.clear();
-    const liLogout = document.getElementById('loginBtn');
-    liLogout.innerText = 'Login'
 }

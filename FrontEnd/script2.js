@@ -10,11 +10,11 @@ if(userData) {
     replaceLoginByLogOut()
     createEditionBanner()
     addUpdateEdition()
-    displayWorks()
+
 } else {
-    displayWorks()
     displayBtn()
 }
+displayWorks()
 
 // ********************* Gestion des works ********************* \\
 
@@ -80,7 +80,7 @@ function updateBtn(categories, works) {
     categories.forEach((category) => {
         const btn = document.createElement("button");
         btn.innerText = category.name;
-        btn.id = `btn${category.name}`;
+        btn.id = `btn${category.id}`;
         divBtn.appendChild(btn);
         btn.addEventListener('click', () => {
             let filteredWorks = filterCategory(works, category.id);
@@ -186,7 +186,7 @@ function setGalleryModal() {
             </span>
         </div>
 
-        <h3 class="modalTitle">Ajout photo</h3>
+        <h3 class="modalTitle">Galerie photo</h3>
         <div class= "galleryModal"></div>
         <hr class="hrGalleryModal" >
         <button class="btnAddImg" type="submit">Ajouter une photo</button>
@@ -311,6 +311,7 @@ function addNewWorkEventListener() {
                                 accept=".jpg, .jpeg, .png"
                                 id="fileUpload"
                                 name="image"
+                                required
                             />
                             <div class="infoPhoto">jpg, png : 4mo max</div>
                             <div id="errorMissingFile">Merci d'ajouter une image</div> 
@@ -450,9 +451,7 @@ function addNewWorkEventListener() {
                                     const formModal = document.getElementById('formModal');
                                     const formData = new FormData(formModal);
                                     const categoryId = document.querySelector('#category').value;
-                                    console.log(categoryId)
                                     formData.set('category', categoryId)
-                                    console.log(formData)
                                     return formData
                                 }
 

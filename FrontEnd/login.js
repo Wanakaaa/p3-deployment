@@ -47,7 +47,7 @@ function afficherErreurConnexion () {
     const loginForm = document.getElementById('loginForm');
     const messageErreur = document.createElement('div');
     messageErreur.innerHTML = `
-        <p class= "erreurLogin">Identifiants incorrects. Veuillez réessayer </p>
+        <p class= "errorLogin">Identifiants incorrects. Veuillez réessayer </p>
     `;
     loginForm.appendChild(messageErreur)
 }

@@ -48,16 +48,24 @@ table {
 }
 /** end reset css**/
 body {
+	display: flex;
+	flex-direction: column;
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans', sans-serif ;
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
+
+main {
+	flex: 1;
+	max-width: 1140px;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 section {
 	margin: 50px 0
@@ -96,6 +104,11 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav li img {
+	width: 22px;
+	height: 22px;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -128,7 +141,7 @@ li:hover {
 }
 .gallery {
 	margin: 2em;
-	/* width: 100%; */
+	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
@@ -183,19 +196,27 @@ input[type="submit"]{
 }
 
 footer {
-	background-color: blue;
-	width: 100%;
-	position: relative; 
+	width: 1440px;
+    position: relative;
+    bottom: 0;
 	left: 0;
-	bottom: 0;
+    width: 100%;
+    background-color: blue;
+    text-align: center;
 }
 
 .footerLogin {
-	background-color: blue;
-	width: 100%;
-	/* position: fixed; */
+    position: fixed;
+    bottom: 0;
 	left: 0;
-	bottom: 0;
+    width: 100%;
+    background-color: blue;
+    text-align: center;
+	padding-right: 50px;
+}
+
+.footerLogin li {
+	padding-right: 50px;
 }
 
 footer nav ul {
@@ -212,7 +233,7 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 }
 
 .btns-portfolio button {
@@ -301,7 +322,7 @@ footer nav ul {
 /* Modal */
 
 .modal{
-	border: 5px solid blue;
+	/* border: 5px solid blue; */
     display: none;
     position: fixed;
     z-index: 1;
@@ -313,24 +334,11 @@ footer nav ul {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* .modal-content{
-	border: 3px solid red;
-    background-color: #f4f4f4;
-    margin: 20% auto;
-    width: 70%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 10px 0 45px 0;
-	border-radius: 10px;
-} */
-
 .modal-content {
-	border: 3px solid red;
+	/* border: 3px solid red; */
 	background-color: #ffffff;
 	margin: 20% auto;
-	width: 70%;
+	width: 630px;
 	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
 	display: flex;
 	flex-direction: column;
@@ -340,7 +348,7 @@ footer nav ul {
 }
 
 .modalHeader {
-	border: 2px solid blue;
+	/* border: 2px solid blue; */
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
@@ -350,7 +358,7 @@ footer nav ul {
 }
 
 .returnBtn i {
-	border: 2px solid pink;
+	/* border: 2px solid pink; */
 	width: 21px;
 	height: 21px;
 	display: flex;
@@ -359,7 +367,7 @@ footer nav ul {
 }
 
 .closeBtn i {
-	border: 2px solid pink;
+	/* border: 2px solid pink; */
 	width: 24px;
 	height: 24px;
 	display: flex;
@@ -381,14 +389,16 @@ footer nav ul {
 	font-weight: 400;
 	font-size: 26px;
 	line-height: 30.5px;
+	margin-bottom: 40px;
 }
 
 /* juste pour la gallery, pas la page ajout work */
 .galleryModal {
 	width: 420px;
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
     display: flex;
     flex-wrap: wrap;
+	
 	/* padding: 0px 105px; */
 }
 
@@ -445,6 +455,8 @@ footer nav ul {
 }
 
 .hrGalleryModal {
+	margin-top: 60px;
+	margin-bottom: 30px;
 	border-top: 1px solid #B3B3B3;
 	width: 70%;
 }
@@ -471,14 +483,14 @@ footer nav ul {
 /* page ajout Work */
 
 .imgUploadForm form {
-	outline: 2px solid grey;
+	/* outline: 2px solid grey; */
 	width: 420px;
 	display: flex;
 	flex-direction: column;
   }
   
   .uploadPhotoForm {
-	border: 2px solid purple;
+	/* border: 2px solid purple; */
 	height: 169px;
 	box-sizing: border-box;
 	margin: 0;
@@ -535,7 +547,7 @@ footer nav ul {
   }
   
   .inputFields {
-	border: 2px solid purple;
+	/* border: 2px solid purple; */
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -565,9 +577,9 @@ footer nav ul {
   }
   
   #category {
-	border: 2px solid blue;
+	/* border: 2px solid blue; */
 	width: 100%;
-	color: red;
+	color: #444444;
 	padding-right: 15px;
   }
   
