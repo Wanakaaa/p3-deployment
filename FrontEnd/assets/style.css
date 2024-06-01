@@ -460,9 +460,9 @@ footer nav ul {
 	width: 420px;
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .uploadPhotoForm {
+}
+
+.uploadPhotoForm {
 	/* border: 2px solid purple; */
 	height: 169px;
 	box-sizing: border-box;
@@ -473,21 +473,21 @@ footer nav ul {
 	background-color: #e8f1f6;
 	border-radius: 3px;
 	padding: 13px 0 19px 0;
-  }
-  
-  .fileUploadLabel {
+}
+
+.fileUploadLabel {
 	width: 76px;
 	height: 76px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-  }
-  
-  .uploadImgIcon {
+}
+
+.uploadImgIcon {
 	color: #cbd6dc;
-  }
-  
-  .fileUploadBtn {
+}
+
+.fileUploadBtn {
 	margin: 6px 0 7px 0;
 	height: 36px;
 	text-decoration: none;
@@ -501,66 +501,66 @@ footer nav ul {
 	font-weight: 500;
 	line-height: 16.42px;
 	cursor: pointer;
-  }
-  
-  #fileUpload {
-	display: none;
-  }
+}
 
-  #errorMissingFile {
+#fileUpload {
+	display: none;
+}
+
+#errorMissingFile {
 	color: red;
 	display: none;
-  }
-  
-  .infoPhoto {
+}
+
+.infoPhoto {
 	font-size: 10px;
 	font-weight: 400;
 	line-height: 11.73px;
 	color: #444444;
-  }
-  
-  .inputFields {
+}
+
+.inputFields {
 	/* border: 2px solid purple; */
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
 	padding: 0;
-  }
-  
-  .inputFields label {
+}
+
+.inputFields label {
 	padding: 21px 0 10px 0;
 	font-size: 14px;
 	font-weight: 500;
 	font-family: "Work Sans", sans-serif;
 	color: #3d3d3d;
-  }
-  
-  .inputFields input,
-  .inputFields select {
+}
+
+.inputFields input,
+.inputFields select {
 	height: 50px;
 	font-size: 14px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-  }
-  
-  .inputFields div {
+}
+
+.inputFields div {
 	padding-bottom: 39px;
 	border: none;
-  }
-  
-  #category {
+}
+
+#category {
 	/* border: 2px solid blue; */
 	width: 100%;
 	color: #444444;
 	padding-right: 15px;
-  }
-  
-  .hrAddPhoto {
+}
+
+.hrAddPhoto {
 	width: 100%;
-  }
-  
-  .validerInput {
+}
+
+.validerInput {
 	font-family: 'Syne' sans-serif;
 	margin: 0 auto;
 	border: none;
@@ -573,9 +573,9 @@ footer nav ul {
 	text-align: center;
 	border-radius: 60px;
 	cursor: pointer;
-  }
-  
-  .validerPreviewInput {
+}
+
+.validerPreviewInput {
 	font-family: 'Syne' sans-serif;
 	margin: 0 auto;
 	border: none;
@@ -588,9 +588,9 @@ footer nav ul {
 	text-align: center;
 	border-radius: 60px;
 	cursor: pointer;
-  }
-  
-  .imgPreviewContainer {
+}  
+
+.imgPreviewContainer {
 	width: 420px;
 	height: 169px;
 	position: relative;
@@ -599,9 +599,9 @@ footer nav ul {
 	padding: 0;
 	margin: 0;
 	border: none;
-  }
-  
-  .imgPreview {
+}
+
+.imgPreview {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -609,5 +609,5 @@ footer nav ul {
 	height: 193px;
 	width: 129px;
 	object-fit : cover;
-  }
+}
 
