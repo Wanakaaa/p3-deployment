@@ -3,12 +3,15 @@
 
 //EvenListener au submit, on assigne email et password à loginData
 // Qu'on passe en argument du fetch. Si succès, on lance handleLoginSuccess, sinon handleLoginError
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
     event.preventDefault();
     const loginData = getFormData();
-    sendLoginRequest(loginData)
-        .then(handleLoginSuccess)
-        .catch(handleLoginError)
+    try {
+        const response = await sendLoginRequest(loginData)
+        handleLoginSuccess(response)
+    } catch(error) {
+        handleLoginError(error)
+    }
 });
 
 
@@ -23,30 +26,24 @@ function getFormData(){
 // Fonction pour envoyer la requête de connexion au serveur.
 // le JSON.stringify pour convertir l'objet JS en string
 
-// j'ai besoin de return la promesse pour pouvoir exécuter le then(handleLoginSuccess) et le catch(handleLoginError) au dessus
 
-function sendLoginRequest(data) {
-    return new Promise(function(resolve, reject) {
-        fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+async function sendLoginRequest(data) {
+    try {
+        const response = await fetch("http://localhost:5678/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         })
-        //Si la réponse est ok (200), on retourn la response en json, sinon, on crée une erreur id incorrect
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Identifiants incorrects.')
-            }
-        })
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        if (!response.ok) {
+            throw new Error('Identifiants incorrects.')
+        } 
+        return await response.json()
+    } catch(error) {
+        throw new Error(error.message)
+    }
 }
-
 
 function handleLoginError(error) {
     displayLoginError(error);
@@ -65,5 +62,5 @@ function displayLoginError(error) {
 
 function handleLoginSuccess(response) {
     sessionStorage.setItem("user", JSON.stringify(response));
-    window.location.href = "index.html";
+    window.location.href = "test.html";
 }

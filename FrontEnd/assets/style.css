@@ -201,7 +201,6 @@ footer {
     bottom: 0;
 	left: 0;
     width: 100%;
-    background-color: blue;
     text-align: center;
 }
 
@@ -210,7 +209,6 @@ footer {
     bottom: 0;
 	left: 0;
     width: 100%;
-    background-color: blue;
     text-align: center;
 	padding-right: 50px;
 }
@@ -413,31 +411,6 @@ footer nav ul {
     height: auto;
 }
 
-/* .closeBtn {
-	border: 2px solid green;
-    color: #000000;
-    font-size: 30px;
-	width: 100%;
-	box-sizing: border-box;
-	text-align: end;
-	padding: 0 30px;
-} */
-
-/* .closeBtn i:hover, .closeBtn i:focus {
-	text-decoration: none;
-	cursor: pointer;
-} */
-
-
-
-/* .titreGallery {
-	font-family: "Work Sans", sans-serif;
-	font-size: 26px;
-	font-weight: 400;
-	text-align: center;
-	padding: 10px 0 46px 0;
-} */
-
 .btnAddImg {
 	text-align: center;
 	border: 1px solid #1D6154;
@@ -618,7 +591,6 @@ footer nav ul {
   }
   
   .imgPreviewContainer {
-	outline: 5px solid orange;
 	width: 420px;
 	height: 169px;
 	position: relative;
@@ -639,130 +611,3 @@ footer nav ul {
 	object-fit : cover;
   }
 
-/* Ajout Photo */
-/* .AddImgModal {
-    width: 420px;
-    background-color: #E8F1F6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-items: center;
-    align-content: center;
-    padding: 13px 0 19px 0;
-    box-sizing: border-box;
-    gap: 7px;
-
-}
-
-.imgIcon {
-    color: #A7A7A7;
-    font-size: 4em;
-}
-
-.addPhoto {
-    height: 36px;
-    text-decoration: none;
-    background-color: #CBD6DC;
-    color: #306685;
-    border: none;
-    text-align: center;
-    border-radius: 50px;
-    padding: 0px 30px 0px 30px;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 17px;
-    cursor: pointer;
-}
-
-
-
-
-.infoPhoto {
-    padding: 0;
-    font-size: 10px;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 400;
-}
-
-.hrAddPhoto {
-    width: 100%;
-    margin-top: 47px;
-    margin-bottom: 0;
-    
-}
-
-.formAjoutPhoto{
-    width: 420px;
-    box-sizing: border-box;
-}
-
-.formAjoutPhoto form {
-	text-align: left;
-	display: flex;
-	flex-direction: column;
-}
-
-.formAjoutPhoto input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-.formAjoutPhoto label {
-	margin: 2em 0 1em 0;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Work Sans', sans-serif;
-}
-
-.formAjoutPhoto select {
-    border-right: 16px solid transparent;
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-    padding-right: 20px;
-}
-
-.formAjoutPhoto input[type="submit"]{
-    height: 36px;
-    width: 237px;
-	font-family: 'Work Sans', sans-serif;
-    font-size: 14px;
-	color: white;
-	background: #A7A7A7;
-	margin : 32px auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-    cursor: pointer;
-} */
-/* .returnBtn i:hover, .returnBtn i:focus {
-    cursor: pointer;
-} */
-
-/* .titreModal {
-    font-family: "Work Sans", sans-serif;
-	font-size: 26px;
-    font-weight: 400;
-    line-height: 30.5px;
-	text-align: center;
-    margin: 0;
-    padding-bottom: 36px;
-} */
-/* 
-.returnClose {
-    border: 2px solid blue;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 0 0 0;
-}
-
-.returnClose span {
-    font-size: 30px;
-    font-weight: bold;
-    padding: 0 30px 0 30px;
-} */

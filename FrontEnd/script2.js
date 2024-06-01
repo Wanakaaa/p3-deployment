@@ -18,7 +18,7 @@ displayWorks()
 
 // ********************* Gestion des works ********************* \\
 
-//Récupérer les Works via l'API 
+// Récupérer les Works via l'API 
 function getWorks(){
     return new Promise(function(resolve, reject) {
         fetch("http://localhost:5678/api/works")
@@ -26,6 +26,16 @@ function getWorks(){
         .then(works => resolve(works))
         .catch(error => reject(error))
     })
+}
+
+function getWorks() {
+    return fetch("http://localhost:5678/api/works")
+        .then(response => {
+            if(!response.ok) {
+                throw new Error('Not ok' + response.statusText)
+            }
+            return response.json()
+        }) 
 }
 
 //Mettre à jour la gallery avec les works
@@ -311,7 +321,6 @@ function addNewWorkEventListener() {
                                 accept=".jpg, .jpeg, .png"
                                 id="fileUpload"
                                 name="image"
-                                required
                             />
                             <div class="infoPhoto">jpg, png : 4mo max</div>
                             <div id="errorMissingFile">Merci d'ajouter une image</div> 
