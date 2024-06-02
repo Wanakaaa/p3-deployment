@@ -1,54 +1,66 @@
-//Ajout d'un eventListener sur loginForm, à l'envoi du form, ça va récupérer les valeurs 
-// d'email et password, envoyer les données au serveur, 
-// si réponse du serveur est 200 (ok) => on retourne response transformée en json
-// sinon, on défini error = 'Identifiants incorrects'
-
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    // Récupère les valeurs des champs email et mot de passe
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-
-    fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: email, password: password})
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            // Crée une nouvelle erreur
-            throw new Error('Identifiants incorrects');
-        }
-    })
-    .then(response => {
-        // Si succès:
-        let user = response;
-        sessionStorage.setItem("user", JSON.stringify(user));
-        window.location.href = "index.html";
-    })
-    // Si erreur
-    .catch(error => {
-        afficherErreurConnexion();
-        console.error("Erreur de connexion :", error.message);
-    })
-});
-
 // sophie.bluel@test.tld
 // S0phie
 
+//EvenListener au submit, on assigne email et password à loginData
+// Qu'on passe en argument du fetch. Si succès, on lance handleLoginSuccess, sinon handleLoginError
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const loginData = getFormData();
+    try {
+        const response = await sendLoginRequest(loginData)
+        handleLoginSuccess(response)
+    } catch(error) {
+        handleLoginError(error)
+    }
+});
 
-function afficherErreurConnexion () {
-    const loginForm = document.getElementById('loginForm');
-    const messageErreur = document.createElement('div');
-    messageErreur.innerHTML = `
-        <p class= "errorLogin">Identifiants incorrects. Veuillez réessayer </p>
-    `;
-    loginForm.appendChild(messageErreur)
+
+// Fonction pour récupérer les valeurs du formulaire.
+// {} car on veut créer un objet js, ce qui équivaut à return {email: email, password: password}
+function getFormData(){
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    return {email, password};
 }
 
+// Fonction pour envoyer la requête de connexion au serveur.
+// le JSON.stringify pour convertir l'objet JS en string
+
+
+async function sendLoginRequest(data) {
+    try {
+        const response = await fetch("http://localhost:5678/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        if (!response.ok) {
+            throw new Error('Identifiants incorrects.')
+        } 
+        return await response.json()
+    } catch(error) {
+        throw new Error(error.message)
+    }
+}
+
+function handleLoginError(error) {
+    displayLoginError(error);
+    console.log("erreur de connexion :", error.message)
+}
+
+function displayLoginError(error) {
+    const loginForm = document.getElementById('loginForm');
+    // if 
+    const messageError = document.createElement('div');
+    messageError.innerHTML = `
+        <p class= "errorLogin">${error.message} Veuillez réessayer </p>
+    `;
+    loginForm.appendChild(messageError)
+}
+
+function handleLoginSuccess(response) {
+    sessionStorage.setItem("user", JSON.stringify(response));
+    window.location.href = "index.html";
+}
