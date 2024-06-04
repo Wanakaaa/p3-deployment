@@ -96,7 +96,6 @@ function updateBtn(categories, works) {
     console.log(category.id, category.name)
     btn.addEventListener("click", () => {
         let filteredWorks = filterCategory(works, category.id);
-        console.log(works)
         updateGallery(filteredWorks);
     });
     });
@@ -462,16 +461,7 @@ async function fetchNewWork(formData) {
 }
 
 
-function handlePostNewWorkSuccess() {
-    console.log("New work envoyé");
-}
-
-function handlePostNewWorkError(error) {
-    console.log("pas marché :", error);
-}
-
-
-//Close la modal
+//Close et return la modal
 function addEventListenerCloseModal() {
     const closeBtn = document.querySelector(".closeBtn i");
     closeBtn.addEventListener("click", closeBtnModal);

@@ -109,6 +109,10 @@ nav li img {
 	height: 22px;
 }
 
+header a {
+    text-decoration: none;
+}
+
 li:hover {
 	color: #B1663C;
 }
