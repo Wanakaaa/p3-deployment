@@ -48,8 +48,6 @@ table {
 }
 /** end reset css**/
 body {
-	display: flex;
-	flex-direction: column;
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans', sans-serif ;
@@ -144,7 +142,6 @@ li:hover {
 	margin-bottom: 1em;
 }
 .gallery {
-	margin: 2em;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -614,4 +611,3 @@ footer nav ul {
 	width: 129px;
 	object-fit : cover;
 }
-

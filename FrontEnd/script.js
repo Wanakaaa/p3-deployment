@@ -7,6 +7,9 @@ const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
 
 //Affichage de la gallery
+
+displayWorks();
+
 if (userData) {
     replaceLoginByLogOut();
     createEditionBanner();
@@ -15,7 +18,7 @@ if (userData) {
     displayBtn();
 }
 
-displayWorks();
+
 
 
 
@@ -262,6 +265,8 @@ async function deleteWork(id) {
     }
 }
 
+// *********** Form new work ************* \\
+
 function addNewWorkEventListener() {
     const btnAddImg = document.querySelector(".btnAddImg");
     btnAddImg.addEventListener("click", () => setNewWorkModal());
@@ -336,17 +341,6 @@ function changeJustifyContentHeader() {
     }
 }
 
-function addEventListenerReturn() {
-    const returnBtn = document.querySelector(".returnBtn");
-    returnBtn.addEventListener("click", () => returnGalleryModal());
-}
-
-function returnGalleryModal() {
-    let modalContent = document.querySelector(".modal-content");
-    modalContent = "";
-    openModal();
-}
-
 async function setCategoriesAddWork() {
     try {
         const selectCategory = document.getElementById("category")
@@ -407,7 +401,7 @@ function displayPreviewHTML() {
     );
 }
 
-// *** post new work *** \\
+// ***************************** Post new work ******************************* \\
 
 // ajout eventListener sur le bouton envoyer
 function addEventListenerSubmitInput() {
@@ -461,7 +455,7 @@ async function fetchNewWork(formData) {
 }
 
 
-//Close et return la modal
+// ***************************** Close and Return ******************************* \\
 function addEventListenerCloseModal() {
     const closeBtn = document.querySelector(".closeBtn i");
     closeBtn.addEventListener("click", closeBtnModal);
@@ -479,4 +473,15 @@ function outsideClick(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+}
+
+function returnGalleryModal() {
+    let modalContent = document.querySelector(".modal-content");
+    modalContent = "";
+    openModal();
+}
+
+function addEventListenerReturn() {
+    const returnBtn = document.querySelector(".returnBtn");
+    returnBtn.addEventListener("click", () => returnGalleryModal());
 }
