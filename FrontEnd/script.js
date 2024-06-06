@@ -300,7 +300,6 @@ function setNewWorkModal() {
                         name="image"
                     />
                     <div class="infoPhoto">jpg, png : 4mo max</div>
-                    <div id="errorMissingFile">Merci d'ajouter une image</div> 
                 </fieldset>
                 <span id="displayPreviewContainer"></span>
                     
@@ -475,8 +474,6 @@ function outsideClick(event) {
 }
 
 function returnGalleryModal() {
-    let modalContent = document.querySelector(".modal-content");
-    modalContent = "";
     openModal();
 }
 
