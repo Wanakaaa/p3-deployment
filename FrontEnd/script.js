@@ -1,4 +1,3 @@
-console.log("hello");
 // Récupère les infos user dans le sessionStorage
 const userData = JSON.parse(sessionStorage.getItem("user"));
 
@@ -30,11 +29,11 @@ async function getWorks() {
     try {
     const response = await fetch("http://localhost:5678/api/works");
     if (!response.ok) {
-        throw new Error(response.statusText);
+        throw new Error(`premiere error` + response.statusText);
     }
     return await response.json();
     } catch (error) {
-    throw new Error(error.message);
+    throw new Error(`seconde error` + error.message);
     }
 }
 
