@@ -17,14 +17,9 @@ if (userData) {
     displayBtn();
 }
 
-
-
-
-
 // ********************* Gestion des works ********************* \\
 
-// Récupérer les Works via l'API : j'attends la réponse au fetch, si erreur, on lance une nouvelle erreur qui sera reprise dans le catch
-// sinon, on retourne response en format json
+// Récupérer les Works via l'API
 async function getWorks() {
     try {
     const response = await fetch("http://localhost:5678/api/works");
@@ -134,7 +129,7 @@ function replaceLoginByLogOut() {
     logoutBtn.addEventListener("click", logOut);
 }
 
-// Clear le sessionStorage, remplace logout par login /!\ A REVOIR
+// Clear le sessionStorage, remplace logout par login
 function logOut() {
     sessionStorage.clear();
     const liLogout = document.getElementById("loginBtn");
