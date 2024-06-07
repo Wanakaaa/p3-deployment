@@ -90,7 +90,6 @@ function updateBtn(categories, works) {
     btn.innerText = category.name;
     btn.id = `btn${category.id}`;
     divBtn.appendChild(btn);
-    console.log(category.id, category.name)
     btn.addEventListener("click", () => {
         let filteredWorks = filterCategory(works, category.id);
         updateGallery(filteredWorks);
